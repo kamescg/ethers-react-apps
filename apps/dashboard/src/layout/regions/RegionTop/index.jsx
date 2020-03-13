@@ -7,6 +7,7 @@ import {
   Address,
   Enable,
   NetworkName,
+  ProviderSelect,
   BlockCurrent,
   NetworkID,
 } from '@ethers-react/ui';
@@ -34,7 +35,8 @@ export default props => (
       <Atom.Box sx={{mx: 3}}>
         <ColorMode />
       </Atom.Box>
-      <Enable />
+      {/* <Enable /> */}
+      <ProviderSelect />
     </Atom.Flex>
   </Atom.Flex>
 );

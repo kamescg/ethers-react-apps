@@ -11,22 +11,3 @@ export const enhanceActions = (actions, state, dispatch) => {
   });
   return enhanced;
 };
-
-/**
- * @function enhanceExtensionActions
- * @description Wrap extenion actions with dispatch
- */
-export const enhanceExtensionActions = (extensions, dispatch) => {
-  if (Array.isArray(extensions) && extensions.length > 0) {
-    let actions = {};
-    extensions.map(extension => {
-      if (extension.actions) {
-        return Object.keys(extension.actions).forEach(action => {
-          actions[action] = extension.actions[action](dispatch);
-        });
-      }
-      return actions;
-    });
-  } else {
-  }
-};

@@ -1,5 +1,5 @@
-import { hashCode } from '../utilities';
-import { CONTRACT_DEPLOY_FROM_BYTECODE_REQUEST } from '../types';
+import { hashCode } from "../lib/utilities";
+import { CONTRACT_DEPLOY_FROM_BYTECODE_REQUEST } from "../lib/types";
 export const contractDeployFromBytecodeRequest = (state, dispatch) => (
   abi,
   bytecode,

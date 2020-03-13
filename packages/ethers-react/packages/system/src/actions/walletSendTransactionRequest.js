@@ -1,4 +1,4 @@
-import { WALLET_SEND_TRANSACTION_REQUEST } from '../types';
+import { WALLET_SEND_TRANSACTION_REQUEST } from "../lib/types";
 export const walletSendTransactionRequest = (
   state,
   dispatch

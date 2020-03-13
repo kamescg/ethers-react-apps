@@ -9,11 +9,10 @@
 import { useEffect } from "react";
 
 /* --- Local --- */
-import { ENABLE_SUCCESS, ENABLE_FAILURE } from "../types";
+import { ENABLE_SUCCESS, ENABLE_FAILURE } from "../lib/types";
 
 /* --- Effect --- */
 export const useWalletEnable = (state, dispatch) => {
-  console.log("useWalletEnable");
   useEffect(() => {
     if (state.isEnableRequested) {
       const runEffect = async () => {

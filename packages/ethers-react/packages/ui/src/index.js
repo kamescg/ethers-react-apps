@@ -7,6 +7,7 @@ export { BlockCurrent } from "./components/BlockCurrent";
 export { ContractDeployed } from "./components/ContractDeployed";
 export { ContractFactory } from "./components/ContractFactory";
 export { default as Enable } from "./components/Enable";
+export { default as ProviderSelect } from "./components/ProviderSelect";
 export { default as NetworkName } from "./components/NetworkName";
 export { default as NetworkID } from "./components/NetworkID";
 export { default as Providers } from "./components/Address";

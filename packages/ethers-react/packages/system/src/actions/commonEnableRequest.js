@@ -1,4 +1,4 @@
-import { ENABLE_REQUEST } from "../types";
+import { ENABLE_REQUEST } from "../lib/types";
 
 export const enableRequest = (state, dispatch) => () => {
   dispatch({

@@ -3,7 +3,7 @@
  */
 
 /* --- Global --- */
-import { selectNetworkName } from "../helpers";
+import { selectNetworkName } from "../lib/helpers";
 
 /* --- Configuration --- */
 const DEPLOYED = "deployed";

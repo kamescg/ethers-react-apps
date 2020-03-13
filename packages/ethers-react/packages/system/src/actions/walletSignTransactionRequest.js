@@ -1,4 +1,4 @@
-import { WALLET_SIGN_TRANSACTION_REQUEST } from '../types';
+import { WALLET_SIGN_TRANSACTION_REQUEST } from "../lib/types";
 export const walletSignTransactionRequest = (
   state,
   dispatch

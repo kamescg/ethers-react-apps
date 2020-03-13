@@ -4,10 +4,10 @@ import { withEthers, helpers } from "@ethers-react/system";
 import { Span } from "@horizin/atoms";
 
 /* ---  Component --- */
-const Address = ({ sx, trim }) => {
+const Address = ({ attr, sx, trim }) => {
   const ethers = withEthers();
   return (
-    <Span sx={sx}>
+    <Span sx={sx} {...attr}>
       {ethers.address
         ? trim
           ? helpers.shortenAddress(ethers.address, 6)

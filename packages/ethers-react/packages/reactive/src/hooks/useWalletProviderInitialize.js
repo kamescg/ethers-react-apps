@@ -8,33 +8,31 @@
 import { useEffect, useState } from "react";
 
 /* --- Local --- */
-import { SET_PROVIDER, SET_PROVIDER_STATUS } from "../types";
+import { PROVIDER_SET, PROVIDER_SET_STATUS } from "../types";
 
 /* --- Effect --- */
 export const useWalletProviderInitialize = (state, dispatch) => {
-  const [providerInitialize, setProviderInitialize] = useState(false);
   useEffect(() => {
-    if (state.address && !providerInitialize) {
+    if (state.reactive.getWalletProviderInitialize && state.address) {
       (async () => {
         try {
           const provider = await new state.instance.providers.Web3Provider(
             window.web3.currentProvider
           );
-
           dispatch({
-            type: SET_PROVIDER,
+            type: PROVIDER_SET,
             payload: provider
           });
           setProviderInitialize(true);
         } catch (error) {
           dispatch({
-            type: SET_PROVIDER_STATUS,
+            type: PROVIDER_SET_STATUS,
             payload: undefined
           });
         }
       })();
     }
-  }, [state.address, providerInitialize]);
+  }, [state.address, state.reactive.getWalletProviderInitialize]);
 
   return true;
 };

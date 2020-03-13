@@ -1,4 +1,4 @@
-import { CONTRACT_DEPLOY_REQUEST } from '../types';
+import { CONTRACT_DEPLOY_REQUEST } from "../lib/types";
 export const contractDeployRequest = (state, dispatch) => ({
   contract,
   inputs

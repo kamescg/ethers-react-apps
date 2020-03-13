@@ -6,6 +6,7 @@
 /* --- Global --- */
 import { useState, useEffect } from "react";
 import { withEthers } from "@ethers-react/system";
+
 /* --- Effect --- */
 export const useTemplate = props => {
   const ethers = withEthers();

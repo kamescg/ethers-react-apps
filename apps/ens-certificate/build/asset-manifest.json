@@ -1,0 +1,18 @@
+{
+  "files": {
+    "main.css": "/static/css/main.b14fada4.chunk.css",
+    "main.js": "/static/js/main.82b545a7.chunk.js",
+    "main.js.map": "/static/js/main.82b545a7.chunk.js.map",
+    "runtime~main.js": "/static/js/runtime~main.a8a9905a.js",
+    "runtime~main.js.map": "/static/js/runtime~main.a8a9905a.js.map",
+    "static/css/2.565e8043.chunk.css": "/static/css/2.565e8043.chunk.css",
+    "static/js/2.05d6bd5a.chunk.js": "/static/js/2.05d6bd5a.chunk.js",
+    "static/js/2.05d6bd5a.chunk.js.map": "/static/js/2.05d6bd5a.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.431f2daf77b87fc98d226ad9e8118552.js": "/precache-manifest.431f2daf77b87fc98d226ad9e8118552.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/2.565e8043.chunk.css.map": "/static/css/2.565e8043.chunk.css.map",
+    "static/css/main.b14fada4.chunk.css.map": "/static/css/main.b14fada4.chunk.css.map",
+    "static/media/blueprint-icons.css": "/static/media/icons-20.ca7934b3.eot"
+  }
+}

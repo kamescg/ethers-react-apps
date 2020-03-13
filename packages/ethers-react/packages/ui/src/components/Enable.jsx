@@ -10,7 +10,6 @@ const EnableEthereum = props => {
   const ethers = withEthers();
   const enabled = false;
 
-  console.log(ethers, "EnableEnable");
   return (
     <>
       {!enabled.dispatched && !enabled.ready && (

@@ -1,5 +1,5 @@
-import { hashCode } from '../utilities';
-import { WALLET_SIGN_TYPED_MESSAGE_REQUEST } from '../types';
+import { hashCode } from "../lib/utilities";
+import { WALLET_SIGN_TYPED_MESSAGE_REQUEST } from "../lib/types";
 export const walletSignMessageTypedRequest = (state, dispatch) => ({
   message,
   delta

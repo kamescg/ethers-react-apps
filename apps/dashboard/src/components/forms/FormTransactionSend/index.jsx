@@ -33,7 +33,7 @@ const FormTransactionSend = props => {
   };
 
   useEffect(() => {
-    console.log(estimateRequest, 'estimate request form');
+    // console.log(estimateRequest, 'estimate request form');
   }, [estimateRequest]);
 
   // useEffect(() => {
@@ -73,7 +73,7 @@ const FormTransactionSend = props => {
         />
 
         <Atom.Flex>
-          <Atom.Button md m1 widthFill>
+          <Atom.Button md m1 widthFill disabled={!ethersProvider.wallet}>
             {props.label}
           </Atom.Button>
           <Atom.Button
@@ -81,6 +81,7 @@ const FormTransactionSend = props => {
             m1
             widthFill
             type="button"
+            disabled={!ethersProvider.wallet}
             onClick={() => estimateTransaction()}>
             Estimate Transactions
           </Atom.Button>

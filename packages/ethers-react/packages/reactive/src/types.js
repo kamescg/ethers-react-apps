@@ -1,4 +1,15 @@
 /*eslint max-len: ["error", { "code": 2000 }]*/
+// * Set Actions
+export const BALANCE_SET = "BALANCE_SET";
+export const BLOCK_CURRENT_SET = "BLOCK_CURRENT_SET";
+export const ENS_ADDRESS_SET = "ENS_ADDRESS_SET";
+export const NETWORK_SET = "NETWORK_SET";
+export const NETWORK_CHANGE_SET = "NETWORK_CHANGE_SET";
+export const NONCE_SET = "NONCE_SET";
+
+export const PROVIDER_SET = "PROVIDER_SET";
+export const PROVIDER_SET_MULTIPLE = "PROVIDER_SET_MULTIPLE";
+export const PROVIDER_SET_STATUS = "PROVIDER_SET_STATUS";
 
 // * Set Actions
 export const SET_PROVIDER = "SET_PROVIDER";
@@ -11,11 +22,6 @@ export const ENABLE_FAILURE = "ENABLE_FAILURE";
 export const INIT_CONTRACT_REQUEST = "INIT_CONTRACT_REQUEST";
 export const INIT_CONTRACT_SUCCESS = "INIT_CONTRACT_SUCCESS";
 export const INIT_CONTRACT_FAILURE = "INIT_CONTRACT_FAILURE";
-
-export const BALANCE_SET = "BALANCE_SET";
-export const ENS_ADDRESS_SET = "ENS_ADDRESS_SET";
-export const NETWORK_SET = "NETWORK_SET";
-export const NONCE_SET = "NONCE_SET";
 
 /* ----------------------- */
 /*         Contact         */

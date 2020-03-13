@@ -5,6 +5,18 @@
   outline: none !important;
 }
 
+#WEB3_CONNECT_MODAL_ID {
+  position: relative;
+  z-index: 1000;
+}
+
+#WEB3_CONNECT_MODAL_ID * {
+  opacity: 1;
+}
+.web3modal-modal-lightbox {
+  z-index: 1000;
+}
+
 html {
   height: 100%;
   overflow-x: hidden;

@@ -11,7 +11,11 @@ import { SIGNER_GET_SUCCESS, SIGNER_GET_FAILURE } from "../types";
 /* --- Effect --- */
 export const useWalletSignerGet = (state, dispatch) => {
   useEffect(() => {
-    if (state.reactive.getProviderSigner && state.address && state.provider) {
+    if (
+      state.settings.reactive.getProviderSigner &&
+      state.address &&
+      state.provider
+    ) {
       (async () => {
         try {
           const signer = await state.provider.getSigner(state.address);

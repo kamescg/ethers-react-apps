@@ -109,7 +109,7 @@ export const useWalletSignTransaction = () => {
     broadcastError: transactionBroadcastError,
     confirmed: transactionConfirmed,
     confirmedError: transactionConfirmedError,
-    isBroadacast: isTransactionBroadcast,
+    isBroadcast: isTransactionBroadcast,
     isConfirmed: isTransactionConfirmed,
     isWaitingResponse: isWaitingResponse
   };

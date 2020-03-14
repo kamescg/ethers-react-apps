@@ -14,7 +14,7 @@ import { NETWORK_CHANGE_SET } from "../types";
 export const useNetworkOnChange = (state, dispatch) => {
   /* --- Account Change : Listen Event --- */
   useEffect(() => {
-    if (state.reactive.watchNetworkOnChange && window.ethereum) {
+    if (state.settings.reactive.watchNetworkOnChange && window.ethereum) {
       window.ethereum.on("networkChanged", networkId => {
         dispatch({
           type: NETWORK_CHANGE_SET,

@@ -7,7 +7,7 @@ import { Span } from "@horizin/atoms";
 import { Component } from "@horizin/ui-compose";
 
 /* ---  Component --- */
-const ProviderSelect = props => {
+export const ProviderSelect = props => {
   const ethers = withEthers();
 
   const [disconnectedPassedProps, setDisconnectedPassedProps] = useState({
@@ -100,5 +100,3 @@ ProviderSelect.propTypes = {
     PropTypes.elementType
   ])
 };
-
-export default ProviderSelect;

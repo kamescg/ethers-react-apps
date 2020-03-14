@@ -10,7 +10,7 @@ import { NONCE_SET } from "../types";
 /* --- Effect --- */
 export const useWalletNonce = (state, dispatch) => {
   useEffect(() => {
-    if (state.reactive.getWalletNonce && state.wallet) {
+    if (state.settings.reactive.getWalletNonce && state.wallet) {
       (async () => {
         try {
           const nonce = await state.wallet.getTransactionCount();

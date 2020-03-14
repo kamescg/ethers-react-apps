@@ -1,12 +1,6 @@
 {
-  "plugins": [
-    "react",
-    "import"
-  ],
-  "extends": [
-    "react-app",
-    "prettier/react"
-  ],
+  "plugins": ["react", "import"],
+  "extends": ["react-app", "prettier/react"],
   "globals": {
     "expect": true,
     "describe": true,
@@ -37,5 +31,6 @@
     "quotes": 0,
     "no-unused-vars": 0,
     "operator-linebreak": 0,
+    "valid-typeof": 0
   }
 }

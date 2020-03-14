@@ -29,7 +29,7 @@ export const useAccountOnChange = (state, dispatch) => {
   /* --- Selected Address : Listen Event --- */
   useEffect(() => {
     if (
-      state.reactive.getAccountOnLoad &&
+      state.settings.reactive.getAccountOnLoad &&
       window.ethereum &&
       window.ethereum.selectedAddress
     ) {
@@ -39,7 +39,7 @@ export const useAccountOnChange = (state, dispatch) => {
 
   /* --- Account Change : Listen Event --- */
   useEffect(() => {
-    if (state.reactive.watchAccountOnChange && window.ethereum) {
+    if (state.settings.reactive.watchAccountOnChange && window.ethereum) {
       window.ethereum.on("accountsChanged", function(accounts) {
         if (accounts[0] !== address) {
           setAddress(accounts[0]);

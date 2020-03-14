@@ -7,6 +7,7 @@ import {
   Activity,
   Interface,
   Contracts,
+  Tokens,
   WalletSigning,
   WalletTransaction,
 } from '@screens';
@@ -17,6 +18,7 @@ const DashboardPage = props => (
       <Activity path="/" />
       <Interface path="/interface" />
       <Contracts path="/contracts" />
+      <Tokens path="/contract/tokens" />
       <WalletSigning path="/signing" />
       <WalletTransaction path="/transactions" />
     </Router>

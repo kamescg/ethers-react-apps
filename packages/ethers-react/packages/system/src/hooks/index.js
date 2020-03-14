@@ -1,7 +1,9 @@
 export { useBalanceChange } from "./useBalanceChange";
 export { useBlockMined } from "./useBlockMined";
+export { useContractSendTransaction } from "./useContractSendTransaction";
 export { useGetTransaction } from "./useGetTransaction";
 export { useGetTransactionReceipt } from "./useGetTransactionReceipt";
+export { useTransactionWatch } from "./useTransactionWatch";
 export { useWalletEstimateTransaction } from "./useWalletEstimateTransaction";
 export { useWalletSignTransaction } from "./useWalletSignTransaction";
 export { useWalletSendTransaction } from "./useWalletSendTransaction";

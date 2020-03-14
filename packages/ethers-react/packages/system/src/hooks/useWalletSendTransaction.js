@@ -25,9 +25,9 @@ export const useWalletSendTransaction = () => {
   /* --- Transaction : States --- */
   const [transactionHash, setTransactionHash] = useState(undefined);
   const [transactionBroadcast, setTransactionBroadcast] = useState(undefined);
+  const [transactionConfirmed, setTransactionConfirmed] = useState(undefined);
 
   /* --- Error : States --- */
-  const [transactionConfirmed, setTransactionConfirmed] = useState(undefined);
   const [transactionBroadcastError, setTransactionBroadcastError] = useState(
     undefined
   );
@@ -45,7 +45,6 @@ export const useWalletSendTransaction = () => {
 
   /* --- sendTransaction : Action --- */
   const sendTransaction = tx => {
-    console.log("request signing");
     setTransactionHash(undefined);
     // Broadcast : Transaction
     setTransactionBroadcast(undefined);
@@ -108,7 +107,7 @@ export const useWalletSendTransaction = () => {
     broadcastError: transactionBroadcastError,
     confirmed: transactionConfirmed,
     confirmedError: transactionConfirmedError,
-    isBroadacast: isTransactionBroadcast,
+    isBroadcast: isTransactionBroadcast,
     isConfirmed: isTransactionConfirmed,
     isWaitingResponse: isWaitingResponse
   };

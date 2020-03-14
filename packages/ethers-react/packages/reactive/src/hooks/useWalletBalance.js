@@ -11,9 +11,9 @@ import { utils } from "ethers";
 import { BALANCE_SET } from "../types";
 
 /* --- Effect --- */
-export const useAccountBalance = (state, dispatch) => {
+export const useWalletBalance = (state, dispatch) => {
   useEffect(() => {
-    if (state.reactive.getAccountBalance && state.address && state.wallet) {
+    if (state.settings.reactive.getWalletBalance && state.wallet) {
       (async () => {
         try {
           const balance = await state.wallet.getBalance();
@@ -31,7 +31,7 @@ export const useAccountBalance = (state, dispatch) => {
         }
       })();
     }
-  }, [state.wallet, state.address]);
+  }, [state.wallet]);
 
   return true;
 };

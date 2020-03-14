@@ -4,7 +4,17 @@ export const extension = {
   name: "reactive",
   hooks,
   reducer,
-  settings: {},
+  settings: {
+    getAccountBalance: false,
+    getAccountOnLoad: false,
+    getAccountNonce: false,
+    getProviderSigner: false,
+    watchAccountBalance: false,
+    watchAccountOnChange: false,
+    watchAccountNonce: false,
+    watchBlockCurrent: false,
+    watchNetworkOnChange: false
+  },
   initialState: {
     address: undefined,
     balance: undefined,
@@ -12,17 +22,6 @@ export const extension = {
     network: undefined,
     nonce: undefined,
     provider: undefined,
-    wallet: undefined,
-    reactive: {
-      getAccountBalance: false,
-      getAccountOnLoad: false,
-      getAccountNonce: false,
-      getProviderSigner: false,
-      watchAccountBalance: false,
-      watchAccountOnChange: false,
-      watchAccountNonce: false,
-      watchBlockCurrent: false,
-      watchNetworkOnChange: false
-    }
+    wallet: undefined
   }
 };

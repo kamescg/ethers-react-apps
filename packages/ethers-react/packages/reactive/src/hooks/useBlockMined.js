@@ -14,7 +14,7 @@ import { BLOCK_CURRENT_SET } from "../types";
 export const useBlockMined = (state, dispatch) => {
   /* --- Account Change : Listen Event --- */
   useEffect(() => {
-    if (state.reactive.watchBlockCurrent && state.provider) {
+    if (state.settings.reactive.watchBlockCurrent && state.provider) {
       state.provider.on("block", block => {
         dispatch({
           type: BLOCK_CURRENT_SET,

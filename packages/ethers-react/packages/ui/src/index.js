@@ -1,18 +1,21 @@
-/* --- Components --- */
-export { default as Address } from "./components/Address";
-export { AccountBalance } from "./components/AccountBalance";
-export { AccountNonce } from "./components/AccountNonce";
-export { Balance } from "./components/Balance";
-export { BlockCurrent } from "./components/BlockCurrent";
-export { ContractDeployed } from "./components/ContractDeployed";
-export { ContractFactory } from "./components/ContractFactory";
-export { GetTransaction } from "./components/GetTransaction";
-export { GetTransactionReceipt } from "./components/GetTransactionReceipt";
-export { default as Enable } from "./components/Enable";
-export { default as ProviderSelect } from "./components/ProviderSelect";
-export { default as NetworkName } from "./components/NetworkName";
-export { default as NetworkID } from "./components/NetworkID";
-export { default as Providers } from "./components/Address";
+export {
+  Address,
+  AccountBalance,
+  AccountNonce,
+  Balance,
+  BlockCurrent,
+  ConfirmationIcon,
+  ConfirmingTransaction,
+  ContractDeployed,
+  ContractFactory,
+  Enable,
+  GetTransaction,
+  GetTransactionReceipt,
+  NetworkName,
+  NetworkID,
+  ProviderSelect,
+  WalletBalance
+} from "./components";
 
 /* --- Selectors --- */
 export { ContractList } from "./selectors/ContractList";
@@ -20,7 +23,6 @@ export { ContractSelectByAddress } from "./selectors/ContractSelectByAddress";
 export { ContractSelectByName } from "./selectors/ContractSelectByName";
 
 /* --- Forms --- */
-// export { default as Transfer } from './forms/TransactionLocal';
 export { SignedMessageLocal } from "./forms/SignedMessageLocal";
 export { SignedMessageTypedLocal } from "./forms/SignedMessageTypedLocal";
 export { SignedMessageTypedLocalV3 } from "./forms/SignedMessageTypedLocalV3";

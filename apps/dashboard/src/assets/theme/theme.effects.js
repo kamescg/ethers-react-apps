@@ -152,6 +152,15 @@ export default {
     wordWrap: {
       wordBreak: 'break-all',
     },
+    textLeft: {
+      textAlign: 'left',
+    },
+    textCenter: {
+      textAlign: 'center',
+    },
+    textRight: {
+      textAlign: 'right',
+    },
 
     // Tag
     card: {

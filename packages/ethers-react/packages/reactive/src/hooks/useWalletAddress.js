@@ -11,7 +11,11 @@ import { SET_ADDRESS } from "../types";
 /* --- Effect --- */
 export const useWalletAddress = (state, dispatch) => {
   useEffect(() => {
-    if (state.reactive.getWalletAddress && state.provider && !state.address) {
+    if (
+      state.settings.reactive.getWalletAddress &&
+      state.provider &&
+      !state.address
+    ) {
       (async () => {
         try {
           const address = await state.provider.listAccounts();

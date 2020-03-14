@@ -27,7 +27,6 @@ export const useGetTransactionReceipt = props => {
           const txReceipt = await ethers.provider.getTransactionReceipt(
             transactionHash
           );
-          console.log(txReceipt, "txReceipt");
           setTransactionReceipt(txReceipt);
         } catch (error) {
           setTransactionReceiptError(error);

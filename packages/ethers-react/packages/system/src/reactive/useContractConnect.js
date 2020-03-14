@@ -29,7 +29,7 @@ export const useContractConnect = (state, dispatch) => {
             .filter(contractId => {
               return state.contracts[contractId].address;
             })
-            .map(contractId => {
+            .forEach(contractId => {
               const contract = new ethers.Contract(
                 state.contracts[contractId].address,
                 state.contracts[contractId].abi,

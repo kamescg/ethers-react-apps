@@ -6,7 +6,7 @@ import { Span } from "@horizin/atoms";
 import { Component } from "@horizin/ui-compose";
 
 /* ---  Component --- */
-const EnableEthereum = props => {
+export const Enable = props => {
   const ethers = withEthers();
   const enabled = false;
 
@@ -40,7 +40,7 @@ const EnableEthereum = props => {
 const Tag = ({ label, ...props }) => <Span {...props}>{label}</Span>;
 
 /* ---  Configuration --- */
-EnableEthereum.defaultProps = {
+Enable.defaultProps = {
   disconnectedLabel: "Enable",
   loadingLabel: "Loading",
   connectedLabel: "Enabled",
@@ -61,7 +61,7 @@ EnableEthereum.defaultProps = {
   }
 };
 
-EnableEthereum.propTypes = {
+Enable.propTypes = {
   disconnectedLabel: PropTypes.string,
   loadingLabel: PropTypes.string,
   connectedLabel: PropTypes.string,
@@ -81,5 +81,3 @@ EnableEthereum.propTypes = {
     PropTypes.elementType
   ])
 };
-
-export default EnableEthereum;

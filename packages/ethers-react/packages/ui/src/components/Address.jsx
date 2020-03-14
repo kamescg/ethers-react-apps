@@ -4,7 +4,7 @@ import { withEthers, helpers } from "@ethers-react/system";
 import { Span } from "@horizin/atoms";
 
 /* ---  Component --- */
-const Address = ({ attr, sx, trim }) => {
+export const Address = ({ attr, sx, trim }) => {
   const ethers = withEthers();
   return (
     <Span sx={sx} {...attr}>
@@ -16,5 +16,3 @@ const Address = ({ attr, sx, trim }) => {
     </Span>
   );
 };
-
-export default Address;

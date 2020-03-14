@@ -53,17 +53,6 @@ Providers.initialState = {
 };
 
 /* --- Reactive --- */
-Reactive.initialState.reactive.getAccountBalance = true;
-Reactive.initialState.reactive.getAccountNonce = true;
-Reactive.initialState.reactive.getAccountOnLoad = true;
-Reactive.initialState.reactive.getProviderSigner = true;
-Reactive.initialState.reactive.getWalletProviderInitialize = false;
-Reactive.initialState.reactive.watchAccountOnChange = true;
-Reactive.initialState.reactive.watchBlockCurrent = true;
-Reactive.initialState.reactive.getWalletAddress = true;
-Reactive.initialState.reactive.getWalletNetwork = true;
-Reactive.initialState.reactive.getWalletNonce = true;
-
 Reactive.settings.getAccountBalance = true;
 Reactive.settings.getAccountNonce = true;
 Reactive.settings.getAccountOnLoad = true;

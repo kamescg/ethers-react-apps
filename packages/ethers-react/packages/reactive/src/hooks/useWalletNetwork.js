@@ -10,7 +10,11 @@ import { NETWORK_SET } from "../types";
 /* --- Effect --- */
 export const useWalletNetwork = (state, dispatch) => {
   useEffect(() => {
-    if (state.reactive.getWalletNetwork && state.provider && !state.address) {
+    if (
+      state.settings.reactive.getWalletNetwork &&
+      state.provider &&
+      !state.address
+    ) {
       (async () => {
         try {
           const network = await state.provider.getNetwork();

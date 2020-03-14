@@ -13,7 +13,7 @@ import { PROVIDER_SET, PROVIDER_SET_STATUS } from "../types";
 /* --- Effect --- */
 export const useWalletProviderInitialize = (state, dispatch) => {
   useEffect(() => {
-    if (state.reactive.getWalletProviderInitialize && state.address) {
+    if (state.settings.reactive.getWalletProviderInitialize && state.address) {
       (async () => {
         try {
           const provider = await new state.instance.providers.Web3Provider(
@@ -32,7 +32,7 @@ export const useWalletProviderInitialize = (state, dispatch) => {
         }
       })();
     }
-  }, [state.address, state.reactive.getWalletProviderInitialize]);
+  }, [state.address, state.settings.reactive.getWalletProviderInitialize]);
 
   return true;
 };

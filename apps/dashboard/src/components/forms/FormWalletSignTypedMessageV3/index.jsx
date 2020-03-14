@@ -6,7 +6,6 @@ import {withEthers, hooks} from '@ethers-react/system';
 /* --- FormWalletSignMessageV3 : Form : Component --- */
 const FormWalletSignMessageV3 = props => {
   const {handleSubmit, register, errors} = useForm();
-
   const signatureRequest = hooks.useWalletSignTypedMessageV3();
 
   const onSubmit = async values => {

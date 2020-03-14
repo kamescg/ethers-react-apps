@@ -38,11 +38,15 @@ export const extensionsInitialize = (extensions, state, dispatch) => {
  */
 export const combineExtensionInitialState = extensions =>
   extensions
-    .map(({ name, initialState }) => {
-      return { name, initialState };
+    .map(({ name, initialState, settings }) => {
+      return { name, initialState, settings };
     })
-    .reduce((acc = {}, { initialState }) => {
-      return { ...acc, ...initialState };
+    .reduce((acc = {}, { name, initialState, settings }) => {
+      return {
+        ...acc,
+        ...initialState,
+        settings: { ...acc.settings, [name]: settings }
+      };
     }, {});
 
 /**

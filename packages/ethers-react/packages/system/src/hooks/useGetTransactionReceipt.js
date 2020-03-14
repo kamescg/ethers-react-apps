@@ -6,6 +6,7 @@
 /* --- Global --- */
 import { useState, useEffect } from "react";
 import { withEthers } from "@ethers-react/system";
+
 /* --- Effect --- */
 export const useGetTransactionReceipt = props => {
   const ethers = withEthers();
@@ -13,11 +14,8 @@ export const useGetTransactionReceipt = props => {
   const [transactionReceipt, setTransactionReceipt] = useState();
   const [transactionReceiptError, setTransactionReceiptError] = useState();
 
-  /* --- Error : State --- */
-  const [error, setError] = useState();
-
   /* --- Initialize --- */
-  const init = txHash => {
+  const getReceipt = txHash => {
     setTransactionHash(txHash);
   };
 
@@ -29,20 +27,20 @@ export const useGetTransactionReceipt = props => {
           const txReceipt = await ethers.provider.getTransactionReceipt(
             transactionHash
           );
-          console.log(txReceipt);
-          setTransactionData(txReceipt);
+          console.log(txReceipt, "txReceipt");
+          setTransactionReceipt(txReceipt);
         } catch (error) {
           setTransactionReceiptError(error);
         }
       })();
     }
-  }, []);
+  }, [ethers.provider, transactionHash]);
 
   /* --- Return : Complete --- */
   return {
-    init,
-    transactionHash,
-    transactionReceipt,
+    getReceipt,
+    hash: transactionHash,
+    data: transactionReceipt,
     error: transactionReceiptError
   };
 };

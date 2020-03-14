@@ -1,9 +1,10 @@
 import * as hooks from "./hooks";
 import reducer from "./reducer";
 export const extension = {
-  name: "ethers-react-reactive",
+  name: "reactive",
   hooks,
   reducer,
+  settings: {},
   initialState: {
     address: undefined,
     balance: undefined,

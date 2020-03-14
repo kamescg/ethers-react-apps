@@ -24,11 +24,8 @@ export const useBalanceChange = (provider, adrs) => {
     }
     return () => {
       if (ethers.provider) {
-        // ethers.provider.removeListener(address, removed => {
-        //   console.log(removed);
-        // });
+        ethers.provider.removeListener(address);
       }
-      // setBalance(undefined);
     };
   }, [ethers.provider]);
 

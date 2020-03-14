@@ -6,7 +6,8 @@
 /* --- Global --- */
 import { useState, useEffect } from "react";
 import { withEthers } from "@ethers-react/system";
-/* --- Effect --- */
+
+/* --- useGetTransaction : Effect --- */
 export const useGetTransaction = txHash => {
   /* --- Application : State --- */
   const ethers = withEthers();
@@ -19,7 +20,7 @@ export const useGetTransaction = txHash => {
   const [error, setError] = useState();
 
   /* --- Initialize --- */
-  const init = txHash => {
+  const getTransaction = txHash => {
     if (txHash) setTransactionHash(txHash);
   };
 
@@ -39,9 +40,9 @@ export const useGetTransaction = txHash => {
 
   /* --- Return : Complete --- */
   return {
-    init,
+    getTransaction,
     error,
-    transactionData,
-    transactionHash
+    data: transactionData,
+    hash: transactionHash
   };
 };

@@ -64,4 +64,15 @@ Reactive.initialState.reactive.getWalletAddress = true;
 Reactive.initialState.reactive.getWalletNetwork = true;
 Reactive.initialState.reactive.getWalletNonce = true;
 
+Reactive.settings.getAccountBalance = true;
+Reactive.settings.getAccountNonce = true;
+Reactive.settings.getAccountOnLoad = true;
+Reactive.settings.getProviderSigner = true;
+Reactive.settings.getWalletProviderInitialize = false;
+Reactive.settings.watchAccountOnChange = true;
+Reactive.settings.watchBlockCurrent = true;
+Reactive.settings.getWalletAddress = true;
+Reactive.settings.getWalletNetwork = true;
+Reactive.settings.getWalletNonce = true;
+
 export const extensions = [Reactive, Providers];

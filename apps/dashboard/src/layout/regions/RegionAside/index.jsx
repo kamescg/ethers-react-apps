@@ -25,14 +25,14 @@ const RegionAside = ({sx, ...props}) => {
       <Atom.Box sx={{px: 4, py: 3}}>
         <Molecule.Menu
           direction="column"
-          label="Dashboard"
+          label="Basics"
           sx={styleItem}
           hover={styleItemHover}
           sxChild={styleItemChild}
           sxChildren={styleItemChildren}
           items={[
             {
-              label: 'Activity',
+              label: 'Provider',
               to: '/',
             },
             {

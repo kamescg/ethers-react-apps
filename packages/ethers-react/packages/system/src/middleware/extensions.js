@@ -12,7 +12,6 @@ export const enhanceExtensionActions = (extensions, dispatch) => {
         });
       }
     });
-    console.log(actions, "extension actions enahnced");
     return actions;
   }
 };

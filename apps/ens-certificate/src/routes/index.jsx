@@ -3,7 +3,7 @@ import {Router} from '@reach/router';
 
 /* --- Local --- */
 import {Dashboard} from '@templates';
-import {Admin, Contracts, SubDomainRegistration} from '@screens';
+import {Admin, GenerateCertificates, SubDomainRegistration} from '@screens';
 
 const DashboardPage = props => (
   <Dashboard>
@@ -13,8 +13,7 @@ const DashboardPage = props => (
       style={{height: '100%', width: '100%'}}
       primary={false}>
       <SubDomainRegistration path="/" />
-      <Admin path="/admin" />
-      <Contracts path="/contracts" />
+      <GenerateCertificates path="/admin" />
     </Router>
   </Dashboard>
 );

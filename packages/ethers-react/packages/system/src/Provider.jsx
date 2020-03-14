@@ -11,9 +11,9 @@ import React, { useContext, useReducer, useEffect, useState } from "react";
 
 /* --- Local --- */
 import Context from "./Context";
-import reducers from "./lib/reducer";
+import reducer from "./lib/reducer";
 import * as actionList from "./actions";
-import { useWalletEnable } from "./reactive";
+import { useContractConnect, useWalletEnable } from "./reactive";
 import {
   enhanceActions,
   enhanceExtensionActions,
@@ -32,7 +32,7 @@ const Provider = ({ children, contracts = [], extensions }) => {
 
   /* --- Reducer --- */
   const [state, dispatch] = useReducer(
-    combineExtensionsReducers([{ name: "core", reducers }, ...extensions]),
+    combineExtensionsReducers([{ name: "core", reducer }, ...extensions]),
     combineExtensionInitialState([
       { name: "core", initialState },
       ...extensions
@@ -43,23 +43,22 @@ const Provider = ({ children, contracts = [], extensions }) => {
   /* --- Extensions : Initialize --- */
   extensionsInitialize(extensions, state, dispatch);
 
-  /* --- Enhance Actions --- */
+  /* --- Reactive : Effects --- */
+  useWalletEnable(state, dispatch);
+  useContractConnect(state, dispatch);
 
+  /* --- Enhance Actions --- */
   useEffect(() => {
     const actions = enhanceActions(actionList, state, dispatch);
     const actionsExtensions = enhanceExtensionActions(extensions, dispatch);
-    console.log(actionsExtensions, "actionsEnhanced");
     setActions(actions);
     setExtensionActions(actionsExtensions);
   }, []);
 
-  /* --- Reactive : Effects --- */
-  useWalletEnable(state, dispatch);
-
-  console.log(extensionActions, "actions extensions");
-
   /* --- Developer Messages --- */
-  console.log(state, "Ethers Provider");
+  if (process.env.NODE_ENV === "development") {
+    console.log(state, "Ethers Provider");
+  }
 
   return (
     <Context.Provider

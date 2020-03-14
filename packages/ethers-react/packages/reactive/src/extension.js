@@ -5,7 +5,13 @@ export const extension = {
   hooks,
   reducer,
   initialState: {
+    address: undefined,
+    balance: undefined,
     blockCurrent: 0,
+    network: undefined,
+    nonce: undefined,
+    provider: undefined,
+    wallet: undefined,
     reactive: {
       getAccountBalance: false,
       getAccountOnLoad: false,

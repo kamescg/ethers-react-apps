@@ -1,8 +1,7 @@
-/*eslint max-len: ["error", { "code": 2000 }]*/
-
 // * Set Actions
-export const SET_PROVIDER = "SET_PROVIDER";
-export const SET_PROVIDER_STATUS = "SET_PROVIDER_STATUS";
+export const PROVIDER_SET = "PROVIDER_SET";
+export const PROVIDER_SET_MULTIPLE = "PROVIDER_SET_MULTIPLE";
+export const PROVIDER_SET_STATUS = "PROVIDER_SET_STATUS";
 
 export const ENABLE_REQUEST = "ENABLE_REQUEST";
 export const ENABLE_SUCCESS = "ENABLE_SUCCESS";

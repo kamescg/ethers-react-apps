@@ -6,3 +6,4 @@ export { actions };
 export { hooks };
 export { selectors };
 export { types };
+export { extension } from "./extension";

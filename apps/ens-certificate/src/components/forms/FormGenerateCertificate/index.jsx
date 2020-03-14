@@ -1,14 +1,10 @@
 /* --- Global --- */
 import {useState, useEffect} from 'react';
 import {useForm} from 'react-hook-form';
-import {withEthers, hooks, selectors, utils} from '@ethers-react/system';
-
-import QRReader from 'react-qr-reader';
+import {hooks, selectors, utils} from '@ethers-react/system';
 
 /* --- Component --- */
 const FormGenerateCertificate = props => {
-  const [address, setAddress] = useState(undefined);
-  const ethersProvider = withEthers();
   const {handleSubmit, register, errors} = useForm();
 
   const [certificateId, setCertificateId] = useState();
@@ -20,11 +16,9 @@ const FormGenerateCertificate = props => {
     'RapidSubdomainRegistrarMeta',
   );
 
-  console.log(contractSelector, 'contractSelector');
-
   /* --- Submit : Action --- */
   const signCertificateRequest = () => {
-    useWalletSignMessageHook.init(certificateId);
+    useWalletSignMessageHook.signMessage(certificateId);
   };
 
   useEffect(() => {
@@ -41,33 +35,9 @@ const FormGenerateCertificate = props => {
     setCertificateId(utils.arrayify(certificateId));
   };
 
-  useEffect(() => {
-    console.log(contractSelector);
-  }, [contractSelector]);
-
-  /* --- QRCode : Effects --- */
-  const handleError = err => {
-    console.log(err);
-  };
-  const handleScan = data => {
-    console.log(data);
-
-    if (data) {
-      const address = data.slice(9);
-      console.log(address, 'address');
-      setAddress(address);
-    }
-  };
-
   return (
     <>
-      <Atom.Box sx={{width: 250}}>
-        {!address && <QRReader onError={handleError} onScan={handleScan} />}
-      </Atom.Box>
       <form onSubmit={handleSubmit(onSubmit)} style={{width: '100%'}}>
-        <Atom.Heading sx="h5" lg>
-          Step 1: Generate Certificate
-        </Atom.Heading>
         <Molecule.Field
           name="domain"
           placeholder="Domain"
@@ -81,7 +51,6 @@ const FormGenerateCertificate = props => {
           name="address"
           placeholder="Address"
           label="Address"
-          defaultValue={address}
           register={register}
           errors={errors}
           sx={styles.field}

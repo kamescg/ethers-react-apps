@@ -56,7 +56,7 @@ EnableEthereum.defaultProps = {
     tag: true
   },
   sxConnected: {
-    pointer: true,
+    // pointer: true,
     tag: true
   }
 };

@@ -1,46 +1,18 @@
 /* --- Global --- */
-import {useEffect, useState} from 'react';
-import {EthersProvider, withEthers} from '@ethers-react/system';
-/* --- Local --- */
-import {FormDomainPurchase} from '@forms';
-import ModalAddress from './ModalAddress';
 
-function getUrlVars() {
-  var vars = {};
-  var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(
-    m,
-    key,
-    value,
-  ) {
-    vars[key] = value;
-  });
-  return vars;
-}
+/* --- Local --- */
+import {FormDomainClaim} from '@forms';
 
 /* --- Page : Component --- */
-const DashboardOverviewPage = props => {
-  const ethers = withEthers();
-  const [certifcate, setCertificate] = useState();
-
-  useEffect(() => {
-    console.log(ethers, 'ethersethers');
-  }, [ethers]);
-
-  useEffect(() => {
-    const queryString = getUrlVars();
-    // const urlParams = new URLSearchParams(queryString);
-    console.log(queryString, 'queryString');
-    setCertificate(queryString.certifcate);
-  }, []);
+const SubDomainRegistrationScreen = props => {
   return (
     <Atom.Flex sx={{flex: 1, height: '100%', width: '100%'}}>
-      <Showcase certifcate={certifcate} />
-      {/* <Content /> */}
+      <Main />
     </Atom.Flex>
   );
 };
 
-const Showcase = props => {
+const Main = props => {
   return (
     <Atom.Flex
       center
@@ -52,12 +24,6 @@ const Showcase = props => {
         width: '100%',
       }}>
       <Atom.BackgroundGradient gradient="bluePurple" />
-      <Atom.BackgroundImage
-        src="https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1633&q=80"
-        sx={{
-          opacity: 0.35,
-        }}
-      />
       <Atom.Container
         sx={{
           color: 'white',
@@ -71,39 +37,15 @@ const Showcase = props => {
             <br />
           </Atom.Heading>
           <Atom.Flex center sx={{width: ['100%', '100%', 700]}}>
-            <FormDomainPurchase />
+            <FormDomainClaim />
           </Atom.Flex>
           <Atom.Heading md sx={{mt: 3}}>
             #1MillionDevs ENS Sub-Domain
           </Atom.Heading>
-          <Atom.Box sx={{textAlign: 'center', mt: 4}}>
-            <Atom.Paragraph>
-              Earn a <strong>FREE Limited Edition</strong>
-              <br />
-              1MillionDevs sub-domain!
-            </Atom.Paragraph>
-            <ModalAddress>
-              <Atom.Span tag pointer sx={{mt: 4, display: 'inline-block'}}>
-                Display Address QR Code
-              </Atom.Span>
-            </ModalAddress>
-          </Atom.Box>
         </Atom.Flex>
       </Atom.Container>
     </Atom.Flex>
   );
 };
 
-const Content = props => {
-  return (
-    <Atom.Container>
-      <Atom.Flex column sx={{py: 3}}>
-        <Atom.Heading as="h3" xxl>
-          Buy Sub-Domain
-        </Atom.Heading>
-      </Atom.Flex>
-    </Atom.Container>
-  );
-};
-
-export default DashboardOverviewPage;
+export default SubDomainRegistrationScreen;

@@ -74,7 +74,7 @@ ProviderSelect.defaultProps = {
   connectedProps: {
     trim: 7,
     attr: {
-      pointer: true,
+      // pointer: true,
       tag: true
     }
   }

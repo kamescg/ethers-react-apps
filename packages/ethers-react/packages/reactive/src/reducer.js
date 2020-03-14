@@ -7,7 +7,9 @@ import {
   NETWORK_SET,
   ENS_ADDRESS_SET,
   SET_ADDRESS,
-  BLOCK_CURRENT_SET
+  BLOCK_CURRENT_SET,
+  SIGNER_GET_SUCCESS,
+  SIGNER_GET_FAILURE
 } from "./types";
 
 const reducerActions = (state, action) => {
@@ -57,6 +59,17 @@ const reducerActions = (state, action) => {
       return {
         ...state,
         ensAddress: action.payload
+      };
+
+    case SIGNER_GET_SUCCESS:
+      return {
+        ...state,
+        wallet: action.payload
+      };
+    case SIGNER_GET_FAILURE:
+      return {
+        ...state,
+        wallet: false
       };
 
     default:

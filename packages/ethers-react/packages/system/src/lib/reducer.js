@@ -356,8 +356,7 @@ const reducerActions = (state, action) => {
       };
 
     default:
-      // return { ...state };
-      throw new Error(`No Reducer Type Set: ${type}`);
+      return state;
   }
 };
 

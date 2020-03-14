@@ -2,7 +2,7 @@
 
 #WEB3_CONNECT_MODAL_ID {
   position: relative;
-  z-index: 1000;
+  z-index: 99999;
 }
 
 #WEB3_CONNECT_MODAL_ID * {

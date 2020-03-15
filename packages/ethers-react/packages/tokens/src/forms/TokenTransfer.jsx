@@ -1,106 +1,72 @@
 /* --- Global --- */
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { withEthers, hooks, selectors } from "@ethers-react/system";
-import { EtherscanHash } from "@ethers-react/ui-etherscan";
+import { hooks } from "@ethers-react/system";
 import { ConfirmingTransaction } from "@ethers-react/ui";
 
-/* --- Component --- */
-export const TokenTransfer = ({ contractAddress, contractName, ...props }) => {
-  /* ------------------- */
-  // State
-  /* ------------------- */
-  /* --- Global : State --- */
+/* --- TokenTransfer : Component --- */
+export const TokenTransfer = ({ contractName, ...props }) => {
+  /* --- Hooks : State --- */
+  const contractTransaction = hooks.useContractSendTransaction(contractName);
 
   /* --- Local : State --- */
   const { handleSubmit, register, errors } = useForm();
-  const [contractToken, setContractToken] = useState(undefined);
 
-  /* --- Hooks : State --- */
-  const contractSelector = selectors.useSelectContractByName(contractName);
-  const contractTransaction = hooks.useContractSendTransaction();
-
-  /* ------------------- */
-  // Effets
-  /* ------------------- */
-  /* --- Select Contract : Effect --- */
-  useEffect(() => {
-    if (
-      contractSelector.isFound &&
-      contractSelector.contract.api &&
-      !contractToken
-    ) {
-      setContractToken(contractSelector.contract);
-      contractTransaction.setContract(contractSelector.contract.api);
-    }
-  }, [contractSelector]);
-
-  /* ------------------- */
-  // Form
-  /* ------------------- */
+  /* --- Actions : Form  --- */
   // Submit : Action : Form
   const onSubmit = async values => {
-    try {
-      contractTransaction.sendTransaction("transfer", [
-        values.address,
-        values.amount
-      ]);
-    } catch (error) {
-      console.log(error);
-    }
+    contractTransaction.sendTransaction({
+      contractName,
+      func: "transfer",
+      inputs: [values.address, values.amount],
+      params: {}
+    });
   };
 
   /* --- Error : Effect --- */
   useEffect(() => {
-    console.log(contractTransaction);
+    console.log(contractTransaction, "contractTransaction TokenTransfer");
   }, [contractTransaction]);
 
+  /* --- TokenTransfer : Form : Compoent --- */
   return (
     <form onSubmit={handleSubmit(onSubmit)} style={{ width: "100%" }}>
       <Molecule.Field
         name="address"
         placeholder="Address"
-        defaultValue="0x5AdB8209b5276A23426994298FE9900644F57924"
+        defaultValue={props.valueAddress}
         register={register}
         errors={errors}
-        sx={styles.field}
+        sx={props.sxField}
       />
 
       <Molecule.Field
         name="amount"
         placeholder="Amount"
-        defaultValue="1"
+        defaultValue={props.valueAmount}
         register={register}
         errors={errors}
-        sx={styles.field}
+        sx={props.sxField}
       />
 
-      <Atom.Button md rounded disabled={!contractToken} sx={styles.button}>
+      <Atom.Button
+        md
+        rounded
+        disabled={!contractTransaction.isContractConnected}
+        sx={props.sxButton}
+      >
         {props.label}
       </Atom.Button>
-      {contractTransaction && (
-        <ConfirmingTransaction tx={contractTransaction} />
-      )}
+      <ConfirmingTransaction tx={contractTransaction} />
     </form>
   );
 };
 
-const styles = {
-  field: {
-    borderColor: "gray",
-    borderWidth: 1,
-    borderStyle: "solid",
-    boxShadow: 0,
-    p: 10,
-    my: 1,
-    width: "100%"
-  },
-  button: {
+TokenTransfer.defaultProps = {
+  label: "Transfer",
+  sxField: {},
+  sxButton: {
     mt: 2,
     width: "100%"
   }
-};
-
-TokenTransfer.defaultProps = {
-  label: "Submit"
 };

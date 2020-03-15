@@ -10,10 +10,8 @@ export const Span = React.forwardRef((props, ref) => (
     __themeKey="text"
     __effectKey="text"
     __variantsKey="effects.text"
-    __css={
-      {
-        // display: "inline-block"
-      }
-    }
+    __css={{
+      display: "inline-block"
+    }}
   />
 ));

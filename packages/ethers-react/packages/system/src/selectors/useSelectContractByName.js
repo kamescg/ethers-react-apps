@@ -13,7 +13,9 @@ export const useSelectContractByName = name => {
 
   /* --- Component : State --- */
   const [contract, setContract] = useState(undefined);
+  const [api, setContractAPI] = useState(undefined);
   const [isFound, setIsFound] = useState();
+  const [isConnected, setIsConnected] = useState();
 
   useEffect(() => {
     if (ethers.contracts) {
@@ -22,6 +24,7 @@ export const useSelectContractByName = name => {
       );
       if (contract.length > 0) {
         setContract(ethers.contracts[contract[0]]);
+
         setIsFound(true);
       } else {
         setIsFound(false);
@@ -29,8 +32,17 @@ export const useSelectContractByName = name => {
     }
   }, [ethers.contracts]);
 
+  useEffect(() => {
+    if (contract && contract.api && !isConnected) {
+      setIsConnected(true);
+      setContractAPI(contract.api);
+    }
+  }, [contract]);
+
   return {
     contract,
+    api,
+    isConnected,
     isFound
   };
 };

@@ -13,13 +13,13 @@ export const ConfirmingTransaction = ({ hash, sx, tx, ...props }) => {
     transactionWatch.watch(hash);
   }, [hash]);
 
-  return !transactionWatch.isWatchingTransaction ? (
+  return !transactionWatch.isWatching ? (
     <Atom.Span tag block textCenter>
       Waiting for Response
     </Atom.Span>
   ) : (
     <Span sx={sx}>
-      {transactionWatch.isTransactionConfirmed ? (
+      {transactionWatch.isConfirmed ? (
         <EtherscanHash block textCenter tag hash={hash}>
           Confirmed
         </EtherscanHash>

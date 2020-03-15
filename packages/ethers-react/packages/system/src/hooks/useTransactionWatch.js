@@ -11,8 +11,8 @@ import { withEthers } from "@ethers-react/system";
 export const useTransactionWatch = props => {
   const ethers = withEthers();
   const [transactionHash, setTransactionHash] = useState();
-  const [isTransactionConfirmed, setIsTransactionConfirmed] = useState();
-  const [isWatchingTransaction, setIsWatchingTransaction] = useState();
+  const [isConfirmed, setIsTransactionConfirmed] = useState();
+  const [isWatching, setIsWatchingTransaction] = useState();
   const [transactionConfirmed, setTransactionConfirmed] = useState(undefined);
   const [transactionConfirmedError, setTransactionConfirmedError] = useState();
 
@@ -43,8 +43,8 @@ export const useTransactionWatch = props => {
   return {
     watch,
     hash: transactionHash,
-    isTransactionConfirmed,
-    isWatchingTransaction,
+    isConfirmed,
+    isWatching,
     data: transactionConfirmed,
     error: transactionConfirmedError
   };

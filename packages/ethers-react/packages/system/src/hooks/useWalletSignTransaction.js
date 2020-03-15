@@ -37,7 +37,7 @@ export const useWalletSignTransaction = () => {
 
   /* --- Boolean : States --- */
   const [isTransactionBroadcast, setIsTransactionBroadcast] = useState(false);
-  const [isTransactionConfirmed, setIsTransactionConfirmed] = useState(false);
+  const [isConfirmed, setIsTransactionConfirmed] = useState(false);
 
   /* ------------------- */
   // Actions
@@ -110,7 +110,7 @@ export const useWalletSignTransaction = () => {
     confirmed: transactionConfirmed,
     confirmedError: transactionConfirmedError,
     isBroadcast: isTransactionBroadcast,
-    isConfirmed: isTransactionConfirmed,
+    isConfirmed: isConfirmed,
     isWaitingResponse: isWaitingResponse
   };
 };

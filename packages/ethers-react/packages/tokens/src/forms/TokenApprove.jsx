@@ -1,94 +1,72 @@
-import { useState } from "react";
+/* --- Global --- */
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { withEthers, selectors } from "@ethers-react/system";
+import { hooks } from "@ethers-react/system";
+import { ConfirmingTransaction } from "@ethers-react/ui";
 
-/* --- Component --- */
-export const TokenApprove = props => {
-  /* ------------------- */
-  // State
-  /* ------------------- */
-
-  /* --- Global : State --- */
-  const ethersProvider = withEthers();
+/* --- TokenTransfer : Component --- */
+export const TokenApprove = ({ contractName, ...props }) => {
+  /* --- Hooks : State --- */
+  const contractTransaction = hooks.useContractSendTransaction(contractName);
 
   /* --- Local : State --- */
   const { handleSubmit, register, errors } = useForm();
-  const [contractToken, setContractToken] = useState();
-  const [transactionStatus, setTransactionStatus] = useState();
 
-  useEffect(() => {
-    const contractSelector = selectors.useSelectContractByName(
-      "RapidSubdomainRegistrarMeta"
-    );
-    console.log(contractSelector, "contractSelector");
-    if (contractSelector.isFound) {
-      setContractToken(contractSelector);
-    }
-  }, [ethersProvider.contracts]);
-
-  /* ------------------- */
-  // Form
-  /* ------------------- */
+  /* --- Actions : Form  --- */
   // Submit : Action : Form
   const onSubmit = async values => {
-    let transaction = {
-      to: values.address,
-      value: ethersProvider.instance.utils.parseEther(values.amount)
-    };
-    try {
-      const tx = await ethersProvider.wallet.sendTransaction(transaction);
-      setTransactionStatus(tx);
-    } catch (error) {
-      setTransactionStatus(error);
-    }
+    contractTransaction.sendTransaction({
+      contractName,
+      func: "approve",
+      inputs: [values.address, values.amount],
+      params: {}
+    });
   };
 
-  /* ------------------- */
-  // Form : Component
-  /* ------------------- */
+  /* --- Error : Effect --- */
+  useEffect(() => {
+    console.log(contractTransaction, "contractTransaction TokenTransfer");
+  }, [contractTransaction]);
+
+  /* --- TokenTransfer : Form : Compoent --- */
   return (
     <form onSubmit={handleSubmit(onSubmit)} style={{ width: "100%" }}>
       <Molecule.Field
         name="address"
         placeholder="Address"
-        defaultValue="0x5AdB8209b5276A23426994298FE9900644F57924"
+        defaultValue={props.valueAddress}
         register={register}
         errors={errors}
-        sx={styles.field}
+        sx={props.sxField}
       />
 
       <Molecule.Field
         name="amount"
         placeholder="Amount"
-        defaultValue="0.1"
+        defaultValue={props.valueAmount}
         register={register}
         errors={errors}
-        sx={styles.field}
+        sx={props.sxField}
       />
 
-      <Atom.Button md rounded sx={styles.button}>
+      <Atom.Button
+        md
+        rounded
+        disabled={!contractTransaction.isContractConnected}
+        sx={props.sxButton}
+      >
         {props.label}
       </Atom.Button>
+      <ConfirmingTransaction tx={contractTransaction} />
     </form>
   );
 };
 
-const styles = {
-  field: {
-    borderColor: "gray",
-    borderWidth: 1,
-    borderStyle: "solid",
-    boxShadow: 0,
-    p: 10,
-    my: 1,
-    width: "100%"
-  },
-  button: {
+TokenApprove.defaultProps = {
+  label: "Approve",
+  sxField: {},
+  sxButton: {
     mt: 2,
     width: "100%"
   }
-};
-
-TokenApprove.defaultProps = {
-  label: "Submit"
 };

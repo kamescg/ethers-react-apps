@@ -5,12 +5,13 @@
 
 /* --- Global --- */
 import { useState, useEffect } from "react";
+import { selectors } from "@ethers-react/system";
 
 /* --- Module --- */
 import withEthers from "../withContext";
 
 /* --- Effect --- */
-export const useContractSendTransaction = () => {
+export const useContractSendTransaction = contractName => {
   /* ------------------- */
   // State
   /* ------------------- */
@@ -18,113 +19,147 @@ export const useContractSendTransaction = () => {
   /* --- Global : State --- */
   const ethersProvider = withEthers();
 
-  /* --- Local : State --- */
-  const [isWaitingResponse, setIsWaitingResponse] = useState(false);
-
   /* --- Contract : States --- */
-  const [contract, setContractAPI] = useState();
+  const [contractNamePassed, setContractNamePassed] = useState(contractName);
   const [contractFunction, setContractFunction] = useState();
   const [contractCallValues, setContractCallValues] = useState();
 
   /* --- Transaction : States --- */
-  const [transactionHash, setTransactionHash] = useState(undefined);
-  const [transactionBroadcast, setTransactionBroadcast] = useState(undefined);
-  const [transactionConfirmed, setTransactionConfirmed] = useState(undefined);
+  const [params, setParams] = useState({});
+  const [hash, setHash] = useState(undefined);
+  const [broadcast, setBroadcast] = useState(undefined);
+  const [receipt, setReceipt] = useState(undefined);
 
   /* --- Error : States --- */
-  const [transactionBroadcastError, setTransactionBroadcastError] = useState(
-    undefined
-  );
-  const [transactionConfirmedError, setTransactionConfirmedError] = useState(
-    undefined
-  );
+  const [broadcastError, setTransactionBroadcastError] = useState(undefined);
+  const [confirmedError, setTransactionConfirmedError] = useState(undefined);
+  const [receiptStatus, setReceiptStatus] = useState();
 
   /* --- Boolean : States --- */
-  const [isTransactionBroadcast, setIsTransactionBroadcast] = useState(false);
-  const [isTransactionConfirmed, setIsTransactionConfirmed] = useState(false);
+  const [isWaitingResponse, setIsWaitingResponse] = useState(false);
+  const [isBroadcast, setIsBroadcast] = useState(false);
+  const [isConfirmed, setIsConfirmed] = useState(false);
+  const [isRejected, setIsRejected] = useState(false);
+
+  /* ------------------- */
+  // Hooks
+  /* ------------------- */
+  /* --- contractSelector : Hook --- */
+  const contractSelector = selectors.useSelectContractByName(
+    contractNamePassed
+  );
 
   /* ------------------- */
   // Actions
   /* ------------------- */
 
-  /* --- sendTransaction : Action --- */
-  const sendTransaction = (func, values) => {
-    setTransactionHash(undefined);
-    // Broadcast : Transaction
-    setTransactionBroadcast(undefined);
-    setIsTransactionBroadcast(undefined);
-    setTransactionBroadcastError(undefined);
-    // Confirmed : Transaction
-    setTransactionConfirmed(undefined);
-    setIsTransactionConfirmed(undefined);
-    setTransactionConfirmedError(undefined);
-    setIsWaitingResponse(true);
-    setContractCallValues(values);
-    setContractFunction(func);
+  /* --- setContractName : Action --- */
+  const setContractName = contractName => {
+    setContractNamePassed(contractName);
   };
 
-  const setContract = contract => {
-    setContractAPI(contract);
+  /* --- sendTransaction : Action --- */
+  const sendTransaction = ({ func, inputs, contractName, params }) => {
+    // Reset : Transaction
+    setReceiptStatus(undefined);
+    setIsRejected(false);
+    setIsWaitingResponse(true);
+    setHash(undefined);
+
+    // Broadcast : Transaction
+    setBroadcast(undefined);
+    setIsBroadcast(undefined);
+    setTransactionBroadcastError(undefined);
+
+    // Confirmed : Transaction
+    setReceipt(undefined);
+    setIsConfirmed(undefined);
+    setTransactionConfirmedError(undefined);
+
+    // Configuration : Transaction
+    if (contractName) setContractNamePassed(contractName);
+    if (params) setParams(params);
+    setContractCallValues(inputs);
+    setContractFunction(func);
   };
 
   /* ------------------- */
   // Effects
   /* ------------------- */
-
-  /* --- Broadcast Transaction :: Effect --- */
+  /* --- Contract Send Transaction :: Effect --- */
   useEffect(() => {
-    if (contractFunction && contractCallValues && !isTransactionBroadcast) {
+    if (
+      contractSelector.api &&
+      contractFunction &&
+      contractCallValues &&
+      !hash
+    ) {
       (async () => {
         try {
-          // const transactionBroadcast = await ethersProvider.wallet.sendTransaction(
-          //   transaction
-          // );
-          const transactionBroadcast = await contract[contractFunction](
-            ...contractCallValues,
-            {
-              gasLimit: 100000
-            }
-          );
+          const transactionBroadcast = await contractSelector.api[
+            contractFunction
+          ](...contractCallValues, params);
+
           setIsWaitingResponse(false);
-          setIsTransactionBroadcast(true);
-          setTransactionHash(transactionBroadcast.hash);
-          setTransactionBroadcast(transactionBroadcast);
+          setIsBroadcast(true);
+          setHash(transactionBroadcast.hash);
+          setBroadcast(transactionBroadcast);
         } catch (error) {
           console.log(error);
+          if (error.code === 4001) setIsRejected(true);
           setIsWaitingResponse(false);
           setTransactionBroadcastError(error);
         }
       })();
     }
-  }, [contractFunction, contractCallValues]);
+  }, [contractSelector.api, contractFunction, contractCallValues]);
 
   /* --- Wait for Transaction : Effect --- */
   useEffect(() => {
-    if (isTransactionBroadcast && transactionHash) {
+    if (isBroadcast && hash) {
       (async () => {
         try {
-          const transactionConfirmed = await ethersProvider.wallet.provider.waitForTransaction(
-            transactionHash
+          const receipt = await ethersProvider.wallet.provider.waitForTransaction(
+            hash
           );
-          setIsTransactionConfirmed(true);
-          setTransactionConfirmed(transactionConfirmed);
+          setIsConfirmed(true);
+          setReceipt(receipt);
+          setReceiptStatus(receipt.status);
         } catch (error) {
+          console.log(error, "waiting error");
           setTransactionConfirmedError(error);
         }
       })();
     }
-  }, [isTransactionBroadcast, transactionHash]);
+  }, [isBroadcast, hash]);
 
+  /* ------------------- */
+  // Debugging
+  /* ------------------- */
+  /* --- contractSelector : Debug --- */
+  useEffect(() => {
+    // console.log(contractSelector, "selector useContractSendTransaction");
+  }, [contractSelector]);
+
+  /* ------------------- */
+  // State : Hook : Return
+  /* ------------------- */
   return {
     sendTransaction,
-    setContract,
-    hash: transactionHash,
-    broadcast: transactionBroadcast,
-    broadcastError: transactionBroadcastError,
-    confirmed: transactionConfirmed,
-    confirmedError: transactionConfirmedError,
-    isBroadcast: isTransactionBroadcast,
-    isConfirmed: isTransactionConfirmed,
-    isWaitingResponse: isWaitingResponse
+    setContractName,
+    hash: hash,
+    broadcast,
+    broadcastError,
+    receipt,
+    receiptStatus,
+    confirmedError,
+    // Boolean States
+    isBroadcast,
+    isConfirmed,
+    isRejected,
+    isWaitingResponse,
+    // State from Contract Selectr
+    isContractConnected: contractSelector.isConnected,
+    isContractFound: contractSelector.isFound
   };
 };

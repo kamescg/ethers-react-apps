@@ -18,6 +18,7 @@ export const ProviderSelect = props => {
     ...props.waitingProps,
     label: props.loadingLabel
   });
+
   useEffect(() => {
     setDisconnectedPassedProps({
       ...disconnectedPassedProps,
@@ -37,8 +38,9 @@ export const ProviderSelect = props => {
         Component(props.componentIsDisconnected, waitingPassedProps)}
       {/* Enabled : Status */}
       {!ethers.isSelectedProviderRequested &&
-        ethers.isSelectedProviderSuccess &&
-        Component(props.componentIsEnabled, props.connectedProps)}
+        ethers.isSelectedProviderSuccess && (
+          <>{Component(props.componentIsEnabled, props.connectedProps)}</>
+        )}
     </>
   );
 };
@@ -50,15 +52,19 @@ const Tag = ({ attr, label, ...props }) => (
   </Span>
 );
 
+const AddressTag = props => {
+  return <Address {...props} />;
+};
+
 /* ---  Configuration --- */
 ProviderSelect.defaultProps = {
   disconnectedLabel: "Select Provider",
   loadingLabel: "Loading",
   connectedLabel: "Enabled",
-  componentIsEnabled: Address,
+  componentIsEnabled: AddressTag,
   componentIsDisconnected: Tag,
   componentIsLoading: Tag,
-  componentIsConnected: Tag,
+  componentIsConnected: <Tag />,
   disconnectedProps: {
     attr: {
       pointer: true,
@@ -72,7 +78,9 @@ ProviderSelect.defaultProps = {
     }
   },
   connectedProps: {
-    trim: 7,
+    trim: 6,
+    copy: true,
+    drawer: true,
     attr: {
       // pointer: true,
       tag: true
@@ -95,7 +103,7 @@ ProviderSelect.propTypes = {
     PropTypes.element,
     PropTypes.elementType
   ]),
-  componentIsConnected: PropTypes.oneOfType([
+  componentIsEnabled: PropTypes.oneOfType([
     PropTypes.element,
     PropTypes.elementType
   ])

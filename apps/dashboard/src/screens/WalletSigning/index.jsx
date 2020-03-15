@@ -27,11 +27,11 @@ const Main = () => {
   return (
     <Atom.Box sx={{}}>
       <WalletSignMessageDemo />
-      <Atom.HorizontalRule sx={{}} />
+      <Atom.HorizontalRule />
       <WalletSignTypedMessageDemo />
-      <Atom.HorizontalRule sx={{}} />
+      <Atom.HorizontalRule />
       <WalletSignTypedMessageV3Demo />
-      <Atom.HorizontalRule sx={{}} />
+      <Atom.HorizontalRule />
       <WalletSignTypedMessageV4Demo />
     </Atom.Box>
   );

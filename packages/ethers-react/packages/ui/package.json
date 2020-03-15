@@ -27,10 +27,13 @@
   "dependencies": {
     "@emotion/core": "^10.0.27",
     "@emotion/styled": "^10.0.27",
+    "@ethers-react/system": "^0.0.1",
+    "@horizin/blueprint-system": "^0.0.1",
     "@styled-system/color": "^5.1.2",
     "@styled-system/css": "^5.1.4",
     "@styled-system/should-forward-prop": "^5.1.4",
     "@styled-system/space": "^5.1.2",
+    "react-copy-to-clipboard": "^5.0.2",
     "react-hook-form": "^4.6.2",
     "theme-ui": "^0.2.52"
   },

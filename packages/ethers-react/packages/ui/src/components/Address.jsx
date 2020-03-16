@@ -3,7 +3,7 @@ import React from "react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { withEthers, helpers } from "@ethers-react/system";
 import { Span } from "@horizin/atoms";
-import { Drawer, Toast } from "@horizin/blueprint-system";
+import { Toast } from "@horizin/blueprint-system";
 
 /* ---  Address : Component --- */
 export const Address = ({ attr, copy, sx, trim }) => {

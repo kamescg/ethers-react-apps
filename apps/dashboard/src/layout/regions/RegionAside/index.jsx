@@ -67,6 +67,7 @@ const RegionAside = ({sx, ...props}) => {
         </Atom.Box>
         <Atom.Box sx={{mt: 3}}>
           <Molecule.Menu
+            expanded
             direction="column"
             label="Contracts"
             sx={styleItem}
@@ -77,6 +78,12 @@ const RegionAside = ({sx, ...props}) => {
               {
                 label: 'Tokens',
                 to: '/contract/tokens',
+                children: [
+                  {
+                    label: 'Design System',
+                    to: '/contract/tokens-blueprint',
+                  },
+                ],
               },
               {
                 label: 'Collectibles',

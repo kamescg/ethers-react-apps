@@ -80,7 +80,6 @@ ProviderSelect.defaultProps = {
   connectedProps: {
     trim: 6,
     copy: true,
-    drawer: true,
     attr: {
       // pointer: true,
       tag: true

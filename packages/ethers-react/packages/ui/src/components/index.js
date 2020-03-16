@@ -4,6 +4,7 @@ export { AccountBalance } from "./AccountBalance";
 export { AccountNonce } from "./AccountNonce";
 export { Balance } from "./Balance";
 export { BlockCurrent } from "./BlockCurrent";
+export { BigNumberToString } from "./BigNumberToString";
 export { ConfirmationIcon } from "./ConfirmationIcon";
 export { ConfirmingTransaction } from "./ConfirmingTransaction";
 export { ContractDeployed } from "./ContractDeployed";

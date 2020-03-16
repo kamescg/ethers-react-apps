@@ -7,8 +7,6 @@ import { Span } from "@horizin/atoms";
 export const Balance = ({ address, sx, ...props }) => {
   const account = hooks.useBalanceChange(address);
 
-  console.log(account, "account");
-
   useEffect(() => {
     if (address) account.setAddress(address);
     return () => true;

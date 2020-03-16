@@ -4,83 +4,146 @@
  */
 
 /* --- Global --- */
-import { useState, useEffect } from "react";
+import { useEffect, useReducer } from "react";
 import { selectors } from "@ethers-react/system";
 
 /* --- Module --- */
 import withEthers from "../withContext";
 
+const LIFECYLE_TRANSACTION_BROADCAST = "LIFECYLE_TRANSACTION_BROADCAST";
+const LIFECYLE_TRANSACTION_SUCCESS = "LIFECYLE_TRANSACTION_SUCCESS";
+const LIFECYLE_TRANSACTION_FAILURE = "LIFECYLE_TRANSACTION_FAILURE";
 /* --- Effect --- */
 export const useContractSendTransaction = contractName => {
   /* ------------------- */
-  // State
+  // Reducer & State
   /* ------------------- */
-
   /* --- Global : State --- */
   const ethersProvider = withEthers();
 
-  /* --- Contract : States --- */
-  const [contractNamePassed, setContractNamePassed] = useState(contractName);
-  const [contractFunction, setContractFunction] = useState();
-  const [contractCallValues, setContractCallValues] = useState();
+  /* --- Local : State --- */
+  const initialState = {
+    lifecyle: undefined,
+    params: {},
+    hash: undefined,
+    broadcast: undefined,
+    receipt: undefined,
+    // Contract : States
+    contractNamePassed: undefined,
+    contractFunction: undefined,
+    contractCallValues: undefined,
 
-  /* --- Transaction : States --- */
-  const [params, setParams] = useState({});
-  const [hash, setHash] = useState(undefined);
-  const [broadcast, setBroadcast] = useState(undefined);
-  const [receipt, setReceipt] = useState(undefined);
+    // Error : States
+    broadcastError: undefined,
+    confirmedError: undefined,
+    receiptStatus: undefined,
+    // Booleans : States
+    isWaitingResponse: false,
+    isBroadcast: false,
+    isConfirmed: false,
+    isRejected: false
+  };
 
-  /* --- Error : States --- */
-  const [broadcastError, setTransactionBroadcastError] = useState(undefined);
-  const [confirmedError, setTransactionConfirmedError] = useState(undefined);
-  const [receiptStatus, setReceiptStatus] = useState();
+  function reducer(state, action) {
+    switch (action.type) {
+      case "SET_PARAMS":
+        return {
+          ...state,
+          params: action.payload
+        };
+      case "SET_CONTRACT_NAME":
+        return {
+          ...state,
+          contractNamePassed: action.payload
+        };
+      case "SET_CONTRACT":
+        return {
+          ...state,
+          contractFunction: action.payload.contractFunction,
+          contractCallValues: action.payload.contractCallValues
+        };
+      case "SEND_TRANSACTION":
+        return {
+          ...state,
+          contractFunction: action.payload.contractFunction,
+          contractCallValues: action.payload.contractCallValues,
+          hash: undefined,
+          isWaitingResponse: true,
+          isBroadcast: false,
+          isConfirmed: false,
+          isRejected: false,
+          receipt: undefined,
+          params: action.payload.params,
+          lifecyle: action.payload.lifecyle
+        };
+      case "SET_BROADCAST_CONFIRMED":
+        return {
+          ...state,
+          isWaitingResponse: false,
+          isBroadcast: true,
+          hash: action.payload.hash,
+          transaction: action.payload.transaction
+        };
+      case "SET_BROADCAST_REJECTED":
+        return {
+          ...state,
+          isWaitingResponse: false,
+          isRejected: true,
+          broadcastError: action.payload.errorCode,
+          broadcastError: action.payload.error
+        };
+      case "SET_RECEIPT_SUCCESS":
+        return {
+          ...state,
+          isWaitingResponse: false,
+          isConfirmed: true,
+          receiptStatus: action.payload.receiptStatus,
+          receipt: action.payload.receipt,
+          lifecyle: action.payload.lifecyle
+        };
 
-  /* --- Boolean : States --- */
-  const [isWaitingResponse, setIsWaitingResponse] = useState(false);
-  const [isBroadcast, setIsBroadcast] = useState(false);
-  const [isConfirmed, setIsConfirmed] = useState(false);
-  const [isRejected, setIsRejected] = useState(false);
+      default:
+        throw new Error();
+    }
+  }
+
+  const [state, dispatch] = useReducer(reducer, initialState);
+  if (
+    process.env.NODE_ENV === "development" &&
+    Number(process.env.REACT_APP_ETHERS_SYSTEM_DEBUG) === 1
+  ) {
+    console.log(state, "Contract SEND");
+  }
 
   /* ------------------- */
   // Hooks
   /* ------------------- */
   /* --- contractSelector : Hook --- */
-  const contractSelector = selectors.useSelectContractByName(
-    contractNamePassed
-  );
+  const contractSelector = selectors.useSelectContractByName(contractName);
 
   /* ------------------- */
   // Actions
   /* ------------------- */
-
   /* --- setContractName : Action --- */
   const setContractName = contractName => {
-    setContractNamePassed(contractName);
+    dispatch({
+      type: "SET_CONTRACT_NAME",
+      payload: contractName
+    });
   };
 
   /* --- sendTransaction : Action --- */
   const sendTransaction = ({ func, inputs, contractName, params }) => {
-    // Reset : Transaction
-    setReceiptStatus(undefined);
-    setIsRejected(false);
-    setIsWaitingResponse(true);
-    setHash(undefined);
-
-    // Broadcast : Transaction
-    setBroadcast(undefined);
-    setIsBroadcast(undefined);
-    setTransactionBroadcastError(undefined);
-
-    // Confirmed : Transaction
-    setReceipt(undefined);
-    setIsConfirmed(undefined);
-    setTransactionConfirmedError(undefined);
-
-    // Configuration : Transaction
-    if (contractName) setContractNamePassed(contractName);
-    if (params) setParams(params);
-    setContractCallValues(inputs);
-    setContractFunction(func);
+    dispatch({
+      type: "SEND_TRANSACTION",
+      payload: {
+        contractName: state.contractName ? state.contractName : contractName,
+        contractFunction: func,
+        contractCallValues: inputs,
+        params: params,
+        lifecyle: LIFECYLE_TRANSACTION_BROADCAST
+      }
+    });
   };
 
   /* ------------------- */
@@ -90,48 +153,59 @@ export const useContractSendTransaction = contractName => {
   useEffect(() => {
     if (
       contractSelector.api &&
-      contractFunction &&
-      contractCallValues &&
-      !hash
+      state.contractFunction &&
+      state.contractCallValues &&
+      !state.hash
     ) {
       (async () => {
         try {
           const transactionBroadcast = await contractSelector.api[
-            contractFunction
-          ](...contractCallValues, params);
+            state.contractFunction
+          ](...state.contractCallValues, state.params);
 
-          setIsWaitingResponse(false);
-          setIsBroadcast(true);
-          setHash(transactionBroadcast.hash);
-          setBroadcast(transactionBroadcast);
+          dispatch({
+            type: "SET_BROADCAST_CONFIRMED",
+            payload: {
+              hash: transactionBroadcast.hash,
+              transaction: transactionBroadcast
+            }
+          });
         } catch (error) {
           console.log(error);
-          if (error.code === 4001) setIsRejected(true);
-          setIsWaitingResponse(false);
-          setTransactionBroadcastError(error);
+          dispatch({
+            type: "SET_BROADCAST_REJECTED",
+            payload: {
+              errorCode: error.code,
+              error: error
+            }
+          });
         }
       })();
     }
-  }, [contractSelector.api, contractFunction, contractCallValues]);
+  }, [contractSelector.api, state.contractFunction, state.contractCallValues]);
 
   /* --- Wait for Transaction : Effect --- */
   useEffect(() => {
-    if (isBroadcast && hash) {
+    if (state.isBroadcast && state.hash) {
       (async () => {
         try {
           const receipt = await ethersProvider.wallet.provider.waitForTransaction(
-            hash
+            state.hash
           );
-          setIsConfirmed(true);
-          setReceipt(receipt);
-          setReceiptStatus(receipt.status);
+          dispatch({
+            type: "SET_RECEIPT_SUCCESS",
+            payload: {
+              receipt: receipt,
+              receiptStatus: receipt.status ? true : false
+            }
+          });
         } catch (error) {
           console.log(error, "waiting error");
           setTransactionConfirmedError(error);
         }
       })();
     }
-  }, [isBroadcast, hash]);
+  }, [state.isBroadcast, state.hash]);
 
   /* ------------------- */
   // Debugging
@@ -147,17 +221,18 @@ export const useContractSendTransaction = contractName => {
   return {
     sendTransaction,
     setContractName,
-    hash: hash,
-    broadcast,
-    broadcastError,
-    receipt,
-    receiptStatus,
-    confirmedError,
+    lifecyle: state.lifecyle,
+    hash: state.hash,
+    broadcast: state.broadcast,
+    broadcastError: state.broadcastError,
+    receipt: state.receipt,
+    receiptStatus: state.receiptStatus,
+    confirmedError: state.confirmedError,
     // Boolean States
-    isBroadcast,
-    isConfirmed,
-    isRejected,
-    isWaitingResponse,
+    isBroadcast: state.isBroadcast,
+    isConfirmed: state.isConfirmed,
+    isRejected: state.isRejected,
+    isWaitingResponse: state.isWaitingResponse,
     // State from Contract Selectr
     isContractConnected: contractSelector.isConnected,
     isContractFound: contractSelector.isFound

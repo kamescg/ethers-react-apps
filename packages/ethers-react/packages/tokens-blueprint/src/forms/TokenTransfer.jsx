@@ -2,12 +2,17 @@
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { hooks } from "@ethers-react/system";
-import { ConfirmingTransaction } from "@ethers-react/ui";
+import {
+  ConfirmingTransaction,
+  useTransactionToast
+} from "@ethers-react/ui-blueprint";
+import { ToastContainer } from "@horizin/blueprint-system";
 
 /* --- TokenTransfer : Component --- */
 export const TokenTransfer = ({ contractName, ...props }) => {
   /* --- Hooks : State --- */
   const contractTransaction = hooks.useContractSendTransaction(contractName);
+  const toast = useTransactionToast(contractTransaction);
 
   /* --- Local : State --- */
   const { handleSubmit, register, errors } = useForm();
@@ -21,12 +26,18 @@ export const TokenTransfer = ({ contractName, ...props }) => {
       inputs: [values.address, values.amount],
       params: {}
     });
+    toast.reset();
   };
 
   /* --- Error : Effect --- */
   useEffect(() => {
     // console.log(contractTransaction, "contractTransaction TokenTransfer");
   }, [contractTransaction]);
+
+  // useEffect(() => {
+  //   if (contractTransaction.isBroadcast)
+  //     ToastContainer.show({ message: "Transaction Broadcast" });
+  // }, [contractTransaction]);
 
   /* --- TokenTransfer : Form : Compoent --- */
   return (

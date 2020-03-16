@@ -57,6 +57,10 @@ export const useContractRead = contractName => {
     setContractNamePassed(contractName);
   };
 
+  useEffect(() => {
+    // console.log(contractSelector, "read contractSelector");
+  }, [contractSelector]);
+
   /* ------------------- */
   // Effects
   /* ------------------- */
@@ -71,6 +75,7 @@ export const useContractRead = contractName => {
     ) {
       (async () => {
         try {
+          console.log("readnig contract");
           const contractReadData = await contractSelector.api[contractFunction](
             ...contractInput
           );

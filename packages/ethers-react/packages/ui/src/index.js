@@ -3,6 +3,7 @@ export {
   AccountBalance,
   AccountNonce,
   Balance,
+  BigNumberToString,
   BlockCurrent,
   ConfirmationIcon,
   ConfirmingTransaction,

@@ -8,6 +8,7 @@ import {
   Interface,
   Contracts,
   Tokens,
+  TokensBlueprint,
   WalletSigning,
   WalletTransaction,
 } from '@screens';
@@ -19,6 +20,7 @@ const DashboardPage = props => (
       <Interface path="/interface" />
       <Contracts path="/contracts" />
       <Tokens path="/contract/tokens" />
+      <TokensBlueprint path="/contract/tokens-blueprint" />
       <WalletSigning path="/signing" />
       <WalletTransaction path="/transactions" />
     </Router>

@@ -2,7 +2,6 @@
 import {CodeHighlight} from '@horizin/molecules';
 
 /* --- Local --- */
-/* --- Local --- */
 import {BlueprintDrawer} from '@components';
 import {
   FormWalletSignMessage,

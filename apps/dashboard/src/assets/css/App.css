@@ -166,14 +166,3 @@ textarea:focus::-webkit-input-placeholder {
   top: 0;
   bottom: 0;
 } */
-
-.bp3-portal {
-  z-index: 10000;
-}
-
-.bp3-overlay-open {
-  height: 100vh;
-}
-.bp3-overlay-content {
-  /* left: calc(50vw - 250px) !important; */
-}

@@ -1,0 +1,11 @@
+.bp3-portal {
+  z-index: 10000;
+}
+
+.bp3-toast-container {
+  z-index: 10000;
+}
+
+.bp3-overlay-open {
+  height: 100vh;
+}

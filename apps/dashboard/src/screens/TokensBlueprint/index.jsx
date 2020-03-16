@@ -6,7 +6,7 @@ import {
   TokenApprove,
   TokenAllowance,
   TokenTransferFrom,
-} from '@ethers-react/tokens';
+} from '@ethers-react/tokens-blueprint';
 
 /* --- Local --- */
 

@@ -1,4 +1,4 @@
-// export { useAccountOnChange } from "./useAccountOnChange";
+export { useAccountOnChange } from "./useAccountOnChange";
 export { useBlockMined } from "./useBlockMined";
 export { useNetworkOnChange } from "./useNetworkOnChange";
 export { useWalletAddress } from "./useWalletAddress";

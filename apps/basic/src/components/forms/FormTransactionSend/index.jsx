@@ -94,7 +94,7 @@ const FormTransactionSend = props => {
           </>
         )}
 
-        {transactionRequest.isWaitingResponse && (
+        {transactionRequest.isRequesting && (
           <Atom.Span tag block sx={{mx: 'auto', textAlign: ' center'}}>
             Waiting for Response
           </Atom.Span>

@@ -38,7 +38,7 @@ export const useContractSendTransaction = contractName => {
     confirmedError: undefined,
     receiptStatus: undefined,
     // Booleans : States
-    isWaitingResponse: false,
+    isRequesting: false,
     isBroadcast: false,
     isConfirmed: false,
     isRejected: false
@@ -68,7 +68,9 @@ export const useContractSendTransaction = contractName => {
           contractFunction: action.payload.contractFunction,
           contractCallValues: action.payload.contractCallValues,
           hash: undefined,
-          isWaitingResponse: true,
+          broadcastError: undefined,
+          broadcastErrorCode: undefined,
+          isRequesting: true,
           isBroadcast: false,
           isConfirmed: false,
           isRejected: false,
@@ -79,7 +81,7 @@ export const useContractSendTransaction = contractName => {
       case "SET_BROADCAST_CONFIRMED":
         return {
           ...state,
-          isWaitingResponse: false,
+          isRequesting: false,
           isBroadcast: true,
           hash: action.payload.hash,
           transaction: action.payload.transaction
@@ -87,15 +89,14 @@ export const useContractSendTransaction = contractName => {
       case "SET_BROADCAST_REJECTED":
         return {
           ...state,
-          isWaitingResponse: false,
-          isRejected: true,
-          broadcastError: action.payload.errorCode,
+          isRequesting: false,
+          broadcastErrorCode: action.payload.errorCode,
           broadcastError: action.payload.error
         };
       case "SET_RECEIPT_SUCCESS":
         return {
           ...state,
-          isWaitingResponse: false,
+          isRequesting: false,
           isConfirmed: true,
           receiptStatus: action.payload.receiptStatus,
           receipt: action.payload.receipt,
@@ -108,10 +109,9 @@ export const useContractSendTransaction = contractName => {
   }
 
   const [state, dispatch] = useReducer(reducer, initialState);
-  if (
-    process.env.NODE_ENV === "development" &&
-    Number(process.env.REACT_APP_ETHERS_SYSTEM_DEBUG) === 1
-  ) {
+
+  // Debugging
+  if (Number(process.env.REACT_APP_ETHERS_SYSTEM_DEBUG) === 1) {
     console.log(state, "Contract SEND");
   }
 
@@ -225,6 +225,7 @@ export const useContractSendTransaction = contractName => {
     hash: state.hash,
     broadcast: state.broadcast,
     broadcastError: state.broadcastError,
+    broadcastErrorCode: state.broadcastErrorCode,
     receipt: state.receipt,
     receiptStatus: state.receiptStatus,
     confirmedError: state.confirmedError,
@@ -232,7 +233,7 @@ export const useContractSendTransaction = contractName => {
     isBroadcast: state.isBroadcast,
     isConfirmed: state.isConfirmed,
     isRejected: state.isRejected,
-    isWaitingResponse: state.isWaitingResponse,
+    isRequesting: state.isRequesting,
     // State from Contract Selectr
     isContractConnected: contractSelector.isConnected,
     isContractFound: contractSelector.isFound

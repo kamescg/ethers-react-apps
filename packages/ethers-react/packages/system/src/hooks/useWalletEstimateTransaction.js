@@ -25,7 +25,7 @@ export const useWalletEstimateTransaction = () => {
   const [estimate, setEstimate] = useState(undefined);
 
   /* --- Boolean : States --- */
-  const [isWaitingResponse, setIsWaitingResponse] = useState(false);
+  const [isRequesting, setIsWaitingResponse] = useState(false);
 
   /* ------------------- */
   // Actions
@@ -66,6 +66,6 @@ export const useWalletEstimateTransaction = () => {
   return {
     estimateTransaction,
     estimate,
-    isWaitingResponse: isWaitingResponse
+    isRequesting: isRequesting
   };
 };

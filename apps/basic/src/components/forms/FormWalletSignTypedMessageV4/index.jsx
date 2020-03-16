@@ -91,7 +91,7 @@ const FormWalletSignMessageV4 = props => {
           {props.label}
         </Atom.Button>
       </Atom.Flex>
-      {signatureRequest.isWaitingResponse && (
+      {signatureRequest.isRequesting && (
         <Atom.Span tag block sx={{mx: 'auto', textAlign: ' center'}}>
           Waiting for Response
         </Atom.Span>

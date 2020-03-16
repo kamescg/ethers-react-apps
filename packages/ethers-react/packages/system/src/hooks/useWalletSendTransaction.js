@@ -19,7 +19,7 @@ export const useWalletSendTransaction = () => {
   const ethersProvider = withEthers();
 
   /* --- Local : State --- */
-  const [isWaitingResponse, setIsWaitingResponse] = useState(false);
+  const [isRequesting, setIsWaitingResponse] = useState(false);
   const [transaction, setTransaction] = useState(undefined);
 
   /* --- Transaction : States --- */
@@ -109,6 +109,6 @@ export const useWalletSendTransaction = () => {
     confirmedError: transactionConfirmedError,
     isBroadcast: isTransactionBroadcast,
     isConfirmed: isConfirmed,
-    isWaitingResponse: isWaitingResponse
+    isRequesting: isRequesting
   };
 };

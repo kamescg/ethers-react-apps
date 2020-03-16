@@ -17,7 +17,7 @@ export const useWalletSignMessage = props => {
   const ethersProvider = withEthers();
 
   /* --- Local : State --- */
-  const [isWaitingResponse, setIsWaitingResponse] = useState(false);
+  const [isRequesting, setIsWaitingResponse] = useState(false);
   const [messageUnsigned, setMessageUnsigned] = useState(undefined);
   const [messageSigned, setMessageSigned] = useState(undefined);
 
@@ -37,7 +37,7 @@ export const useWalletSignMessage = props => {
 
   /* --- Sign Message :: Effect --- */
   useEffect(() => {
-    if (messageUnsigned && isWaitingResponse) {
+    if (messageUnsigned && isRequesting) {
       (async () => {
         try {
           const messageSigned = await ethersProvider.wallet.signMessage(
@@ -51,14 +51,14 @@ export const useWalletSignMessage = props => {
         }
       })();
     }
-  }, [messageUnsigned, isWaitingResponse]);
+  }, [messageUnsigned, isRequesting]);
 
   /* --- Return : Complete --- */
   return {
     signMessage,
     messageSigned,
     messageUnsigned,
-    isWaitingResponse,
+    isRequesting,
     error: messageSignedError
   };
 };

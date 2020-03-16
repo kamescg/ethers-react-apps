@@ -9,7 +9,7 @@ export const ConfirmingTransaction = ({ hash, sx, tx, ...props }) => {
   /* ---  Transaction Watch : Effect --- */
   return (
     <>
-      {tx.isWaitingResponse && (
+      {tx.isRequesting && (
         <Atom.Span tag block textCenter>
           Waiting for Response
         </Atom.Span>

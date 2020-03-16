@@ -1,6 +1,6 @@
 {
   "name": "ethers-react",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "description": "A React Library to Simplify Interactions with the Ethereum Blockchain",
   "main": "index.js",
   "author": "Kames <kames@horizin.io>",

@@ -9,8 +9,8 @@ import BurnerConnectProvider from '@burner-wallet/burner-connect-provider';
 import WalletConnectProvider from '@walletconnect/web3-provider';
 
 /* --- Local --- */
-import ERC20 from '@contracts/ERC20.json';
 import MeshDevCoin from '@contracts/MeshDevCoin.json';
+import ERC20 from '@contracts/ERC20.json';
 
 /* --- Contracts --- */
 export const contracts = [

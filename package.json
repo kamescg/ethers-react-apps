@@ -1,6 +1,7 @@
 {
-  "name": "dapp-lerna",
+  "name": "ethers-react-apps",
   "desription": "decentralized application boilerplate",
+  "version": "0.0.0",
   "private": true,
   "scripts": {
     "bootstrap": "lerna bootstrap",

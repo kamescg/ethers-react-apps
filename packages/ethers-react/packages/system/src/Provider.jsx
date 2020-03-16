@@ -56,11 +56,8 @@ const Provider = ({ children, contracts = [], extensions }) => {
   }, []);
 
   /* --- Developer Messages --- */
-  if (
-    process.env.NODE_ENV === "development" &&
-    Number(process.env.REACT_APP_ETHERS_SYSTEM_DEBUG) === 1
-  ) {
-    // console.log(state, "Ethers Provider");
+  if (Number(process.env.REACT_APP_ETHERS_SYSTEM_DEBUG) === 1) {
+    console.log(state, "Ethers Provider");
   }
 
   return (

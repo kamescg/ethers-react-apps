@@ -1,7 +1,6 @@
 export { useBalanceChange } from "./useBalanceChange";
 export { useBlockMined } from "./useBlockMined";
 export { useContractRead } from "./useContractRead";
-export { useContractReadPassSelector } from "./useContractReadPassSelector";
 export { useContractSendTransaction } from "./useContractSendTransaction";
 export { useGetTransaction } from "./useGetTransaction";
 export { useGetTransactionReceipt } from "./useGetTransactionReceipt";

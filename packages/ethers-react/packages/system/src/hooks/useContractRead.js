@@ -75,7 +75,6 @@ export const useContractRead = contractName => {
     ) {
       (async () => {
         try {
-          console.log("readnig contract");
           const contractReadData = await contractSelector.api[contractFunction](
             ...contractInput
           );
@@ -95,6 +94,8 @@ export const useContractRead = contractName => {
     input: contractInput,
     data: contractReadData,
     err: transactionBroadcastError,
+    isRead: isContractReadData,
+    isError: isContractReadData ? true : false,
     isContractReadData
   };
 };

@@ -1,7 +1,8 @@
 /* --- Global --- */
 import { useEffect, useReducer } from "react";
 import { ToastContainer, Intent } from "@horizin/blueprint-system";
-/* --- Effect --- */
+
+/* --- useTransactionToast : Effect --- */
 export const useTransactionToast = tx => {
   /* ------------------- */
   // Reducer & State

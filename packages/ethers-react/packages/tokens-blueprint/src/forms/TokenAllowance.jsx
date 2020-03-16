@@ -2,13 +2,16 @@
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { hooks, withEthers } from "@ethers-react/system";
-import { ConfirmingTransaction, BigNumberToString } from "@ethers-react/ui";
+import { useReadToast } from "@ethers-react/ui-blueprint";
+import { BigNumberToString, Address } from "@ethers-react/ui";
 
 /* --- TokenTransfer : Component --- */
 export const TokenAllowance = ({ contractName, ...props }) => {
   const ethers = withEthers();
+
   /* --- Hooks : State --- */
   const contractTransaction = hooks.useContractRead(contractName);
+  const toast = useReadToast(contractTransaction);
 
   /* --- Local : State --- */
   const { handleSubmit, register, errors } = useForm();
@@ -21,12 +24,18 @@ export const TokenAllowance = ({ contractName, ...props }) => {
       func: "allowance",
       inputs: [values.addressOwner, values.addressSpender]
     });
+    toast.reset();
   };
 
-  /* --- Error : Effect --- */
   useEffect(() => {
-    // console.log(contractTransaction, "contractTransaction TokenTransfer");
-  }, [contractTransaction]);
+    if (contractTransaction.data)
+      toast.setMsg(
+        <Atom.Span>
+          <strong>Allowance:</strong>
+          {contractTransaction.data.toString()}
+        </Atom.Span>
+      );
+  }, [contractTransaction.data]);
 
   /* --- TokenTransfer : Form : Compoent --- */
   return (
@@ -60,7 +69,6 @@ export const TokenAllowance = ({ contractName, ...props }) => {
           fontWeight: 700
         }}
       />
-      <ConfirmingTransaction tx={contractTransaction} />
     </form>
   );
 };

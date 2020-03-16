@@ -4,4 +4,4 @@ export { ConfirmingTransaction } from "./components";
 
 /* --- Hooks --- */
 export { hooks };
-export { useTransactionToast } from "./hooks";
+export { useTransactionToast, useReadToast } from "./hooks";

@@ -1,13 +1,13 @@
 /* --- Global --- */
-import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { hooks } from "@ethers-react/system";
-import { ConfirmingTransaction } from "@ethers-react/ui";
+import { useTransactionToast } from "@ethers-react/ui-blueprint";
 
 /* --- TokenTransfer : Component --- */
 export const TokenApprove = ({ contractName, ...props }) => {
   /* --- Hooks : State --- */
   const contractTransaction = hooks.useContractSendTransaction(contractName);
+  const toast = useTransactionToast(contractTransaction);
 
   /* --- Local : State --- */
   const { handleSubmit, register, errors } = useForm();
@@ -21,12 +21,8 @@ export const TokenApprove = ({ contractName, ...props }) => {
       inputs: [values.address, values.amount],
       params: {}
     });
+    toast.reset();
   };
-
-  /* --- Error : Effect --- */
-  useEffect(() => {
-    // console.log(contractTransaction, "contractTransaction TokenTransfer");
-  }, [contractTransaction]);
 
   /* --- TokenTransfer : Form : Compoent --- */
   return (
@@ -57,7 +53,6 @@ export const TokenApprove = ({ contractName, ...props }) => {
       >
         {props.label}
       </Atom.Button>
-      <ConfirmingTransaction tx={contractTransaction} />
     </form>
   );
 };

@@ -2,11 +2,7 @@
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { hooks } from "@ethers-react/system";
-import {
-  ConfirmingTransaction,
-  useTransactionToast
-} from "@ethers-react/ui-blueprint";
-import { ToastContainer } from "@horizin/blueprint-system";
+import { useTransactionToast } from "@ethers-react/ui-blueprint";
 
 /* --- TokenTransfer : Component --- */
 export const TokenTransfer = ({ contractName, ...props }) => {
@@ -31,13 +27,10 @@ export const TokenTransfer = ({ contractName, ...props }) => {
 
   /* --- Error : Effect --- */
   useEffect(() => {
-    // console.log(contractTransaction, "contractTransaction TokenTransfer");
+    if (Number(process.env.REACT_APP_ETHERS_SYSTEM_DEBUG) === 1) {
+      console.log(contractTransaction, "contractTransaction TokenTransfer");
+    }
   }, [contractTransaction]);
-
-  // useEffect(() => {
-  //   if (contractTransaction.isBroadcast)
-  //     ToastContainer.show({ message: "Transaction Broadcast" });
-  // }, [contractTransaction]);
 
   /* --- TokenTransfer : Form : Compoent --- */
   return (
@@ -68,7 +61,6 @@ export const TokenTransfer = ({ contractName, ...props }) => {
       >
         {props.label}
       </Atom.Button>
-      <ConfirmingTransaction tx={contractTransaction} />
     </form>
   );
 };

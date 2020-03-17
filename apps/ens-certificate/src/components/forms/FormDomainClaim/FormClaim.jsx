@@ -59,9 +59,6 @@ const FormClaimOverlay = props => {
       ethersProvider.address, // User Address
       process.env.REACT_APP_ENS_RESOLVER, // Sub-Domain Resolver
       values.certificate, // Domain Certificate,
-      {
-        gasLimit: 9990195,
-      },
     );
   };
 

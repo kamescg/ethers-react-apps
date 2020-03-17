@@ -1,14 +1,14 @@
+import reducer from "./lib/reducer";
+import * as types from "./lib/types";
 import * as hooks from "./hooks";
 import * as actions from "./actions";
 import * as selectors from "./selectors";
-import * as types from "./types";
-import reducer from "./reducer";
 export const extension = {
-  name: "ethers-react-global",
+  name: "global",
   actions,
   hooks,
-  selectors,
-  types,
+  // selectors,
+  // types,
   reducer,
   initialState: {
     activity: {

@@ -28,8 +28,13 @@ Interested in creating an extension to add functionality? You guessed it! Open a
 
 - [Application Development](#application-development)
 - [Module Development](#module-development)
-- [Ethers React Libraries](#ethers-react-libraries)
+- [Ethers React](#ethers-react-libraries)
   - [System](docs/modules/ethers-react-system.md)
+  - [Reactive](docs/modules/ethers-react-reactive.md)
+  - [Providers](docs/modules/ethers-react-providers.md)
+  - [Globalize](docs/modules/ethers-react-Globalize.md)
+- [Applications](#ethers-react-libraries)
+  - [Dashboard](docs/apps/ethers-react-app-dashboard.md)
 - [Getting Started](#getting-started)
 
 ## Getting Started

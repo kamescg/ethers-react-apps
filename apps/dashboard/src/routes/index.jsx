@@ -11,6 +11,7 @@ import {
   TokensBlueprint,
   WalletSigning,
   WalletTransaction,
+  WalletTransactionGlobal,
 } from '@screens';
 
 const DashboardPage = props => (
@@ -23,6 +24,7 @@ const DashboardPage = props => (
       <TokensBlueprint path="/contract/tokens-blueprint" />
       <WalletSigning path="/signing" />
       <WalletTransaction path="/transactions" />
+      <WalletTransactionGlobal path="/transactions-global" />
     </Router>
   </Dashboard>
 );

@@ -3,11 +3,9 @@ import * as hooks from "./hooks";
 import reducer from "./lib/reducer";
 
 export const extension = {
-  name: "providers",
+  name: "tokens",
   actions,
   hooks,
   reducer,
-  initialState: {
-    PROVIDER_INIT: 0
-  }
+  initialState: {}
 };

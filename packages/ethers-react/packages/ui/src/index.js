@@ -29,6 +29,3 @@ export { SignedMessageTypedLocal } from "./forms/SignedMessageTypedLocal";
 export { SignedMessageTypedLocalV3 } from "./forms/SignedMessageTypedLocalV3";
 export { TransactionLocal } from "./forms/TransactionLocal";
 export { TransactionGlobal } from "./forms/TransactionGlobal";
-export { ApproveLocal } from "./forms/ERC20/ApproveLocal";
-export { TokenDeploy } from "./forms/ERC20/TokenDeploy";
-export { TransferLocal } from "./forms/ERC20/TransferLocal";

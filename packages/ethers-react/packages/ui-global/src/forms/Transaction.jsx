@@ -1,23 +1,19 @@
 /* --- Global --- */
 import { useForm } from "react-hook-form";
-import { withEthers } from "@ethers-react/system";
+import { withEthers, utils } from "@ethers-react/system";
 
-/* --- Component --- */
-export const TransactionGlobal = props => {
+/* --- Transaction : Component --- */
+export const Transaction = props => {
   const ethersProvider = withEthers();
   const { handleSubmit, register, errors } = useForm();
 
   const onSubmit = async values => {
-    try {
-      let transaction = {
-        to: values.address,
-        value: ethersProvider.instance.utils.parseEther(values.amount),
-        data: values.data
-      };
-      ethersProvider.walletSendTransactionRequest(transaction);
-    } catch (error) {
-      console.log(error);
-    }
+    let tx = {
+      to: values.address,
+      value: utils.parseEther(values.amount),
+      data: values.data
+    };
+    ethersProvider.walletSendTransactionRequest(tx);
   };
 
   return (
@@ -29,7 +25,7 @@ export const TransactionGlobal = props => {
         defaultValue={ethersProvider.address}
         register={register}
         errors={errors}
-        sx={styles.field}
+        sx={{}}
       />
 
       <Molecule.Field
@@ -39,7 +35,7 @@ export const TransactionGlobal = props => {
         defaultValue="0.1"
         register={register}
         errors={errors}
-        sx={styles.field}
+        sx={{}}
       />
       <Molecule.Field
         name="data"
@@ -48,32 +44,23 @@ export const TransactionGlobal = props => {
         defaultValue="0x"
         register={register}
         errors={errors}
-        sx={styles.field}
+        sx={{}}
       />
 
-      <Atom.Button md rounded sx={styles.button}>
+      <Atom.Button
+        md
+        rounded
+        sx={{
+          mt: 2,
+          width: "100%"
+        }}
+      >
         {props.label}
       </Atom.Button>
     </form>
   );
 };
 
-const styles = {
-  field: {
-    borderColor: "gray",
-    borderWidth: 1,
-    borderStyle: "solid",
-    boxShadow: 0,
-    p: 10,
-    my: 1,
-    width: "100%"
-  },
-  button: {
-    mt: 2,
-    width: "100%"
-  }
-};
-
-TransactionGlobal.defaultProps = {
+Transaction.defaultProps = {
   label: "Submit"
 };

@@ -61,6 +61,12 @@ const RegionAside = ({sx, ...props}) => {
               {
                 label: 'Transactions',
                 to: '/transactions',
+                children: [
+                  {
+                    label: 'Global State',
+                    to: '/transactions-global',
+                  },
+                ],
               },
             ]}
           />

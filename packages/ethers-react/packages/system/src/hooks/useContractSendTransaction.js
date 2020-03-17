@@ -112,7 +112,7 @@ export const useContractSendTransaction = contractName => {
 
   // Debugging
   if (Number(process.env.REACT_APP_ETHERS_SYSTEM_DEBUG) === 1) {
-    console.log(state, "Contract SEND");
+    // console.log(state, "Contract SEND");
   }
 
   /* ------------------- */

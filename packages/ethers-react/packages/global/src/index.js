@@ -1,9 +1,6 @@
-import * as actions from "./actions";
+import * as types from "./lib/types";
 import * as hooks from "./hooks";
+import * as actions from "./actions";
 import * as selectors from "./selectors";
-import * as types from "./types";
-export { actions };
-export { hooks };
-export { selectors };
-export { types };
+export { actions, hooks, types, selectors };
 export { extension } from "./extension";

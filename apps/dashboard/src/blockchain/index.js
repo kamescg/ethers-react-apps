@@ -1,6 +1,7 @@
 /* --- Global --- */
 import {extension as Reactive} from '@ethers-react/reactive';
 import {extension as Providers} from '@ethers-react/providers';
+import {extension as Global} from '@ethers-react/Global';
 
 /* --- Local --- */
 import ERC20 from '@contracts/ERC20.json';
@@ -37,4 +38,4 @@ Reactive.settings.getWalletNetwork = true;
 Reactive.settings.getWalletNonce = false;
 
 // export const extensions = [Reactive, Providers];
-export const extensions = [Reactive, Providers];
+export const extensions = [Global, Reactive, Providers];

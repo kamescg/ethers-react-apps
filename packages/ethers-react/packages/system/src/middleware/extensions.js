@@ -1,38 +1,4 @@
 /**
- * @function enhanceExtensionActions
- * @description Wrap extenion actions with dispatch
- */
-export const enhanceExtensionActions = (extensions, dispatch) => {
-  if (Array.isArray(extensions) && extensions.length > 0) {
-    let actions = {};
-    extensions.forEach(extension => {
-      if (extension.actions) {
-        Object.keys(extension.actions).forEach(action => {
-          actions[action] = extension.actions[action](dispatch);
-        });
-      }
-    });
-    return actions;
-  }
-};
-
-/**
- * @function extensionsInitialize
- * @description Wrap extenion actions with dispatch
- */
-export const extensionsInitialize = (extensions, state, dispatch) => {
-  if (Array.isArray(extensions) && extensions.length > 0) {
-    return extensions.map(extension => {
-      return Object.values(extension.hooks).map(effect =>
-        effect(state, dispatch)
-      );
-    });
-  } else {
-    return null;
-  }
-};
-
-/**
  * @function combineExtensionInitialState
  * @description Wrap extenion actions with dispatch
  */
@@ -65,4 +31,38 @@ export const combineExtensionsReducers = extensions => {
     }
     return nextState;
   };
+};
+
+/**
+ * @function enhanceExtensionActions
+ * @description Wrap extenion actions with dispatch
+ */
+export const enhanceExtensionActions = (extensions, dispatch) => {
+  if (Array.isArray(extensions) && extensions.length > 0) {
+    let actions = {};
+    extensions.forEach(extension => {
+      if (extension.actions) {
+        Object.keys(extension.actions).forEach(action => {
+          actions[action] = extension.actions[action](dispatch);
+        });
+      }
+    });
+    return actions;
+  }
+};
+
+/**
+ * @function extensionsInitialize
+ * @description
+ */
+export const extensionsInitialize = (extensions, state, dispatch) => {
+  if (Array.isArray(extensions) && extensions.length > 0) {
+    return extensions.map(extension => {
+      return Object.values(extension.hooks).map(effect =>
+        effect(state, dispatch)
+      );
+    });
+  } else {
+    return null;
+  }
 };

@@ -27,15 +27,15 @@ const providerOptions = {
   fortmatic: {
     package: Fortmatic, // required
     options: {
-      key: 'pk_test_811EF9842FE79F43', // required
+      key: 'pk_test_811EF9842FE79F43',
     },
   },
   burnerconnect: {
-    package: BurnerConnectProvider, // required
+    package: BurnerConnectProvider,
     options: {},
   },
   walletconnect: {
-    package: WalletConnectProvider, // required
+    package: WalletConnectProvider,
     options: {
       infuraId: '4cbb1b6204174468b34379b4acdbd1cd', // required
     },

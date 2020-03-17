@@ -25,7 +25,7 @@ export const TokenTransfer = ({ contractName, ...props }) => {
 
   /* --- Error : Effect --- */
   useEffect(() => {
-    // console.log(contractTransaction, "contractTransaction TokenTransfer");
+    console.log(contractTransaction, "contractTransaction TokenTransfer");
   }, [contractTransaction]);
 
   /* --- TokenTransfer : Form : Compoent --- */

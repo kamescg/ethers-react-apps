@@ -26,10 +26,11 @@ Interested in creating an extension to add functionality? You guessed it! Open a
 
 # Overview
 
-[Application Development](#application-development)
-[Module Development](#module-development)
-[Ethers React Libraries](#ethers-react-libraries)
-[Getting Started](#getting-started)
+- [Application Development](#application-development)
+- [Module Development](#module-development)
+- [Ethers React Libraries](#ethers-react-libraries)
+  - [System](docs/modules/ethers-react-system.md)
+- [Getting Started](#getting-started)
 
 ## Getting Started
 

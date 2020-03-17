@@ -20,6 +20,7 @@
     "@ethers-react/reactive": "^0.0.1",
     "@ethers-react/system": "^0.0.1",
     "@ethers-react/ui": "^0.0.1",
+    "@ethers-react/ui-etherscan": "^0.0.1",
     "@horizin/atoms": "^0.0.1",
     "@horizin/blueprint-system": "^0.0.1",
     "@horizin/molecules": "^0.0.1",

@@ -13,7 +13,7 @@ export const useWalletNetwork = (state, dispatch) => {
     if (
       state.settings.reactive.getWalletNetwork &&
       state.provider &&
-      !state.address
+      state.address
     ) {
       (async () => {
         try {

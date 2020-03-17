@@ -55,6 +55,7 @@ Reactive.settings.watchBlockCurrent = true;
 Reactive.settings.getWalletAddress = true;
 Reactive.settings.getWalletNetwork = true;
 Reactive.settings.getWalletNonce = true;
+Reactive.settings.watchNetworkOnChange = true;
 
 export const extensions = [Reactive, Providers];
 // export const extensions = [Providers];

@@ -149,7 +149,7 @@ export const useContractSendTransaction = contractName => {
   /* ------------------- */
   // Effects
   /* ------------------- */
-  /* --- Contract Send Transaction :: Effect --- */
+  /* --- Contract Send Transaction : Effect --- */
   useEffect(() => {
     if (
       contractSelector.api &&
